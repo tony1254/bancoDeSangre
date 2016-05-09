@@ -133,6 +133,7 @@ En cuanto al factor Rh, los positivos pueden recibir de los negativos pero los n
 
 
 */
+
 function tipoSangre($grupo,$factor){
     $color='green';
     

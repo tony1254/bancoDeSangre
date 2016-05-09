@@ -95,7 +95,7 @@ public function update(Request $request, $id)
         }   
              }
         $usuario->email=$request->input('email');
-        if (!empty($var)) {
+        if (!empty($request->get('contrasena'))) {
             $usuario->password=bcrypt($request->get('contrasena'));
         }
         $usuario->save();
