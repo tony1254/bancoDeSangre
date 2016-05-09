@@ -44,7 +44,7 @@
 					</div>
                             <div class="input-field col s6">  
                             
-                              <div class="col-xs-6">
+                              <div class="col-sm-6">
                                 Tipo de Sangre:
                               </div>
                               <div class="col-xs-3">

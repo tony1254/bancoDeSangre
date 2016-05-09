@@ -8,14 +8,15 @@
 
     <title> @yield('title','Banco de Sangre')</title>
 <!--Import Google Icon Font-->
-     
+      <!-- Compiled and minified CSS -->
+  
 
-    <link href="\bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="\bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel="stylesheet">
-    <link href="\bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
-    <link href="\bower_components/Materialize/dist/css/materialize.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="\bower_components/bootstrap/dist/css/font-awesome.min.css">
-    <link href="\bower_components\material-design-icons\iconfont\material-icons.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" rel="stylesheet">
+    <link href="/bower_components/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+    <link href="/bower_components/Materialize/dist/css/materialize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/font-awesome.min.css">
+    <link href="/bower_components\material-design-icons\iconfont\material-icons.css" rel="stylesheet">
 
 
 
