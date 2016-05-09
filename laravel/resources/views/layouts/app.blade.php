@@ -221,7 +221,7 @@ ul.tabs li a
                     Usuarios
                   </div>
                 </a>
-                <a class="nounderline " href="{{ url('/admin/usuario') }}" >
+                <a class="nounderline " href="{{ url('/admin/persona') }}" >
                   <div class="col-xs-2 ">
                      <span class="fa fa-universal-access  " aria-hidden="true"></span>
                 </div>
