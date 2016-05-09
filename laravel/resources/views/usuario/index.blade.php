@@ -35,10 +35,17 @@
       	<br>
       	<em>{{$usuario->email}}</em>
       </p>
-       <a href="{{ url($mid.'/usuario/'.$usuario->id.'/edit') }}" class=" btn-xs  secondary-content amber-text waves-effect waves-yellow transparent">
+      <div class="secondary-content">
+           <a href="{{ url($mid.'/usuario/'.$usuario->id.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
+                              <i class="material-icons" style="  vertical-align: top;">
+                                remove_red_eye
+                              </i>
+        </a>
+       <a href="{{ url($mid.'/usuario/'.$usuario->id.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
 									        <i class="material-icons" style="  vertical-align: top;">
 									        	create
 									        </i>
+      </div>
 		</a>
     </li>
 

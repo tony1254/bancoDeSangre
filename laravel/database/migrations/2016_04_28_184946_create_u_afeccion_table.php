@@ -14,7 +14,7 @@ class CreateUAfeccionTable extends Migration
     {
         Schema::create('u_afeccion', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cui');
+            $table->string('cui');
             $table->integer('idTipoAfeccion');
             $table->timestamps();
         });

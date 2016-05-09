@@ -9,6 +9,8 @@ use App\CRol;
 use App\User;
 use App\CSexo;
 use App\Persona;
+use App\UAfeccion;
+use App\CTipoAfeccion;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -67,9 +69,56 @@ if (empty($request->input('search'))) {
         return "index";    
    }
 
-public function show($id)
+public function show($id,Request $request)
    {
+    $persona=Persona::find($id);
+    if(!empty($request->input('msj'))){
+        return view('persona/show', ['msj'=>$request->input('msj'),'mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>$persona,'afecciones'=>UAfeccion::where('cui',$persona->cui)->get()]);
+
+    }
+        return view('persona/show', ['mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>$persona,'afecciones'=>UAfeccion::where('cui',$persona->cui)->get()]);
         return "show";    
+   }
+      /**
+   *FUncion para Afecciones
+   */
+public function afeccionGet($id)
+   {
+    $persona=Persona::find($id);
+    
+        return view('persona/afeccionesAdd', ['mid'=>mid(),'persona'=>$persona,'afecciones'=>CTipoAfeccion::all()]);
+        return "show";    
+   }
+      /**
+   *FUncion para post de afeccion
+   */
+public function afeccionAdd($id,Request $request)
+   {
+    $persona=Persona::find($id);
+    $persona->estado=0;
+    $persona->save();
+$afeccion=new UAfeccion;
+$afeccion->cui=$persona->cui;
+$afeccion->idTipoAfeccion=$request->input('afeccion');
+$afeccion->save();
+        return redirect()->to(mid().'/persona/'.$persona->id.'?msj=Nueva Afeccion Agregada exitosamente');
+   }      /**
+   *FUncion para eliminar de afeccion
+   */
+public function afeccionEliminar($idp,$ida,Request $request)
+   {
+
+    $afeccion=UAfeccion::find($ida);
+    $cui=$afeccion->cui;
+    $afeccion->delete();
+    $afecciones=UAfeccion::where('cui',$cui)->get();
+
+    if (count($afecciones)==0) {
+      $persona=Persona::find($idp);
+      $persona->estado=1;
+      $persona->save();
+    }
+        return redirect()->to(mid().'/persona/'.$idp.'?msj=Afeccion Eliminada exitosamente');
    }
    /**
    *FUncion para editar
@@ -104,7 +153,7 @@ public function store(Request $request)
         $persona->factorSangre=$request->input('factorSangre');
         $persona->fechaNacimiento=$request->input('fechaNacimiento');
         $persona->save();  
-        return redirect()->to('admin/persona?search='.$persona->cui);
+        return redirect()->to(mid().'/persona?search='.$persona->cui);
          
         return "store";    
    }
@@ -125,8 +174,9 @@ public function update($id,Request $request)
         $persona->grupoSangre=$request->input('grupoSangre');
         $persona->factorSangre=$request->input('factorSangre');
         $persona->fechaNacimiento=$request->input('fechaNacimiento');
+        // $persona->estado=$request->input('estado');
         $persona->save();  
-        return redirect()->to('admin/persona?search='.$persona->cui);
+        return redirect()->to(mid().'/persona?search='.$persona->cui);
 
         return "update";    
    }

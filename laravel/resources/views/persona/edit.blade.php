@@ -103,8 +103,23 @@
                                 
                                 <label class="active"  for="emaile">telefono 2</label>
                             </div>      
+            <!--                 <div class="input-field col s6">
 
-
+                              <select class="form-control" name="estado" id="estado">
+                             
+                                <option value="1"
+                                @if (1==$persona->estado)
+                                  selected 
+                                @endif
+                                >Activo</option>
+                                <option value="0"
+                                @if (0==$persona->estado)
+                                  selected 
+                                @endif
+                                >Inactivo</option>
+                              
+                              </select>
+                            </div>    -->   
                       </div>
               </div>
 </div>

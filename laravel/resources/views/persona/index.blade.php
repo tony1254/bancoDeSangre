@@ -30,17 +30,31 @@
     
     <!-- {!!var_dump($tipoSangre=tipoSangre($persona->grupoSangre,$persona->factorSangre))!!} -->
 
-      <i class="circle {{$tipoSangre['color']}}">{{$tipoSangre['nombre']}}</i>
+      <i class="circle
+@if ($persona->estado==1)
+    {{$tipoSangre['color']}}
+  @else
+    black
+@endif
+       ">{{$tipoSangre['nombre']}}</i>
       <span class="title">{{$persona->nombre.' '.$persona->apellido}}</span>
       <p>{{substr($persona->cui , 0, 4)}}-{{substr($persona->cui , 4, 5)}}-{{substr($persona->cui , 9, 4)}}
       	<br>
       	<em>{{$persona->email}}</em><b>/</b>{{$persona->telefono1}}
       </p>
-       <a href="{{ url($mid.'/persona/'.$persona->id.'/edit') }}" class=" btn-xs  secondary-content amber-text waves-effect waves-yellow transparent">
-									        <i class="material-icons" style="  vertical-align: top;">
-									        	create
-									        </i>
-		</a>
+      <div class="secondary-content">
+        
+           <a href="{{ url($mid.'/persona/'.$persona->id.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
+                              <i class="material-icons" style="  vertical-align: top;">
+                                remove_red_eye
+                              </i>
+        </a>
+        <a href="{{ url($mid.'/persona/'.$persona->id.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
+                              <i class="material-icons" style="  vertical-align: top;">
+                                create
+                              </i>
+        </a>
+      </div>
     </li>
 
  @endforeach

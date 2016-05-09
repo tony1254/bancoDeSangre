@@ -121,7 +121,7 @@ ul.tabs li a
                                      <a href="{{ url('/admin/usuario') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-users "></i>&nbsp;&nbsp;Usuarios</a>
                                 </li>
                                 <li>
-                                     <a href="{{ url('/admin/persona') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-universal-access "></i>&nbsp;&nbsp;Personas</a>
+                                     <a href="{{ url('/'.mid().'/persona') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-universal-access "></i>&nbsp;&nbsp;Personas</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
@@ -221,7 +221,7 @@ ul.tabs li a
                     Usuarios
                   </div>
                 </a>
-                <a class="nounderline " href="{{ url('/admin/persona') }}" >
+                <a class="nounderline " href="{{ url('/'.mid().'/persona') }}" >
                   <div class="col-xs-2 ">
                      <span class="fa fa-universal-access  " aria-hidden="true"></span>
                 </div>

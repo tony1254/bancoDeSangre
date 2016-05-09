@@ -47,8 +47,12 @@ Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function
 		Route::put('/catalogos/{catalogo}/{id}/update', 'catalogos\catalogosController@update')->name('admin.catalogos.update');
 	/*Rutas de formularios para PERSONA*/
 		Route::resource('persona', 'personas\personaController');
-		Route::resource('usuario', 'usuarios\usuarioController');
 		Route::get('persona/busqueda', 'personas\personaController@busqueda');
+		Route::get('persona/{id}/afeccionAdd', 'personas\personaController@afeccionGet');
+		Route::post('persona/{id}/afeccionAdd', 'personas\personaController@afeccionAdd');
+		Route::delete('persona/{idp}/afeccionEliminar/{ida}', 'personas\personaController@afeccionEliminar');
+	/*Rutas de formularios para USUARIo*/
+		Route::resource('usuario', 'usuarios\usuarioController');
 		Route::get('usuario/busqueda', 'usuarios\usuarioController@busqueda');
 		
 
@@ -60,6 +64,13 @@ Route::group(['middleware'=>['auth','encargado'],'prefix'=>'encargado'],function
 	Route::resource('personas', 'personas\personasController');
 	Route::get('/', 'usuarios\usuariosController@index');
 	//Route::resource('persona', 'PersonaController');
+	/*Rutas de formularios para PERSONA*/
+		Route::resource('persona', 'personas\personaController');
+		Route::get('persona/busqueda', 'personas\personaController@busqueda');
+		Route::get('persona/{id}/afeccionAdd', 'personas\personaController@afeccionGet');
+		Route::post('persona/{id}/afeccionAdd', 'personas\personaController@afeccionAdd');
+		Route::delete('persona/{idp}/afeccionEliminar/{ida}', 'personas\personaController@afeccionEliminar');
+
 });
 Route::group(['middleware'=>['auth','usuario'],'prefix'=>'usuario'],function(){
 	Route::get('/', 'usuarios\usuariosController@index');	

@@ -69,6 +69,7 @@ if (empty($request->input('search'))) {
 
 public function show($id)
    {
+        return view('usuario/show', ['mid'=>mid(),'roles'=>CRol::all(),'usuario'=>User::find($id)]);
         return "show";    
    }
    /**

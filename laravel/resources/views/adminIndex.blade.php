@@ -63,7 +63,7 @@
 				<a href="{{ url('/admin/usuario') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-users fa-2x" aria-hidden="true"></i>
 					Usuarios
 				</a>
-				<a href="{{ url('/admin/persona') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-universal-access fa-2x" aria-hidden="true"></i>
+				<a href="{{ url('/'.mid().'/persona') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-universal-access fa-2x" aria-hidden="true"></i>
 					Personas
 				</a>
 
@@ -200,7 +200,21 @@ function ocultar(){
 					<br>
 					<b>Telefono 2:</b>
 					{{$persona->telefono2}}
-					
+					 <br>
+			          <b>Estado:</b>
+			          @if ($persona->estado==1)
+			              <font color="green">
+			               <b>
+			                  Puede Donar Sangre
+			               </b>
+			              </font>
+			            @else
+			            <font color="red">
+			               <b>
+			                  NO Puede Donar Sangre
+			               </b>
+			              </font>
+			          @endif
 		        @endif
 
 		  		</div>
