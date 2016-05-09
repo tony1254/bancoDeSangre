@@ -296,7 +296,7 @@ ul.tabs li a
           <div class="footer-copyright">
             <div class="container text-center">
             © 2016 <a class="white-text" href="https://www.facebook.com/Tonycby">Luis Garcia</a> 
-            <a class="grey-text text-lighten-4 right" href="https://github.com/tony1254/bancoSangre"><i class="fa fa-github fa-2x" aria-hidden="true"></i> Codigo Fuente
+            <a class="grey-text text-lighten-4 right" href="https://github.com/tony1254/bancoDeSangre"><i class="fa fa-github fa-2x" aria-hidden="true"></i> Codigo Fuente
               </a>
             </div>
           </div>
