@@ -47,7 +47,9 @@ Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function
 		Route::put('/catalogos/{catalogo}/{id}/update', 'catalogos\catalogosController@update')->name('admin.catalogos.update');
 	/*Rutas de formularios para PERSONA*/
 		Route::resource('persona', 'personas\personaController');
+		Route::resource('usuario', 'usuarios\usuarioController');
 		Route::get('persona/busqueda', 'personas\personaController@busqueda');
+		Route::get('usuario/busqueda', 'usuarios\usuarioController@busqueda');
 		
 
 	//Route::resource('persona', 'PersonaController');

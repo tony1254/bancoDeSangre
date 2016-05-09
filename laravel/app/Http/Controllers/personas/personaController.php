@@ -71,10 +71,18 @@ public function show($id)
    {
         return "show";    
    }
+   /**
+   *FUncion para editar
+   */
 public function edit($id)
    {
-        return "edit";    
+
+        return view('persona/edit', ['mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>Persona::find($id)]);
+         
    }
+   /**
+   *FUncion para Crear
+   */
 public function create()
    {
         
@@ -100,8 +108,26 @@ public function store(Request $request)
          
         return "store";    
    }
-public function update(Request $request)
+   /**
+   *FUncion para Actuaizar
+   */   
+public function update($id,Request $request)
    {
+         $persona= Persona::find($id);
+        $persona->nombre=$request->input('nombre');
+        $persona->apellido=$request->input('apellido');
+        $persona->vecindad=$request->input('vecindad');
+        $persona->telefono1=$request->input('telefono1');
+        $persona->telefono2=$request->input('telefono2');
+        $persona->cui=str_replace('-', '', $request->get('cui'));
+        $persona->email=$request->input('email');
+        $persona->sexo=$request->input('sexo');
+        $persona->grupoSangre=$request->input('grupoSangre');
+        $persona->factorSangre=$request->input('factorSangre');
+        $persona->fechaNacimiento=$request->input('fechaNacimiento');
+        $persona->save();  
+        return redirect()->to('admin/persona?search='.$persona->cui);
+
         return "update";    
    }
 public function destroy($id)
