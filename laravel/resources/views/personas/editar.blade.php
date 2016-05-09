@@ -25,10 +25,10 @@
 				      </div>
 				      <div class="input-field col s6">	
 				      
-				      	<div class="col-xs-3">
+				      	<div class="col-sm-3">
 				      		Sexo:
 				      	</div>
-				      	<div class="col-xs-9">
+				      	<div class="col-sm-9">
 				      		
 						<select class="form-control" name="sexo" id="sexo">
 						@foreach ($sexos as $sexo)
@@ -47,7 +47,7 @@
                               <div class="col-sm-6">
                                 Tipo de Sangre:
                               </div>
-                              <div class="col-xs-3">
+                              <div class="col-sm-3">
                                 
                           <select class="form-control" name="grupoSangre" id="grupoSangre">
                           @foreach (App\CGrupoSangre::all() as $sexo)
@@ -59,7 +59,7 @@
                           @endforeach
                           </select>
                               </div>
-                              <div class="col-xs-3">
+                              <div class="col-sm-3">
                                 
                           <select class="form-control" name="factorSangre" id="factorSangre">
                           @foreach (App\CFactorSangre::all() as $sexo)
