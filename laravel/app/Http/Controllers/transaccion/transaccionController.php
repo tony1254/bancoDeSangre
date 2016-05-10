@@ -11,6 +11,8 @@ use App\CSexo;
 use App\Persona;
 use App\UAfeccion;
 use App\CTipoAfeccion;
+use App\TDetalleTransaccion;
+use App\TTransaccion;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -47,26 +49,19 @@ class transaccionController extends Controller
    */
 public function index(Request $request)
    {
-    
-$mid=mid();
-
 if (empty($request->input('search'))) {
-     $personas=Persona::paginate(10);
-        return view('persona/index', ['personas' => $personas,'mid'=>$mid]);
+     $detalle=TDetalleTransaccion::paginate(10);
+        return view('transaccion/index', ['transaccions' => $detalle,'mid'=>mid()]);
 }else{
-   /**
+/**
    *busqueda
    */
   $busqueda=$request->input('search');
   $busqueda=str_replace ( '-', '' , $busqueda);
      $personas=Persona::where('cui','like','%'.$busqueda.'%'  )->orWhere('nombre','like','%'.$busqueda.'%'  )->orWhere('apellido','like','%'.$busqueda.'%'  )->paginate(10);
-        return view('persona/index', ['personas' => $personas,'mid'=>$mid,'busqueda'=>$busqueda]);
+        return view('persona/index', ['personas' => $personas,'mid'=>mid(),'busqueda'=>$busqueda]);
 
 }
-
-
-
-        return "index";    
    }
 
 public function show($id,Request $request)

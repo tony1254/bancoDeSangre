@@ -13,6 +13,8 @@ use App\CFactorSangre;
 use App\CGrupoSangre;
 use App\CTipoAfeccion;
 use App\CTipoTransaccion;
+use App\TTransaccion;
+use App\TDetalleTransaccion;
 
 
 class DatabaseSeeder extends Seeder
@@ -50,8 +52,9 @@ class DatabaseSeeder extends Seeder
          DB::table('persona')->insert(['email' => 'Luis@luis.com','cui' => '2145800082214','nombre' => 'Luis Antonio','apellido' => 'Garcia Aguirre','sexo' => '1','fechaNacimiento' => '1992-09-23','telefono1' => '54820872','Vecindad' => ' San Benito Petén','factorSangre' => '1','grupoSangre' => '4']);
          DB::table('persona')->insert(['email' => 'juan@juan.com','cui' => '1234562141701','nombre' => 'Juan Antonio','apellido' => 'Ramirez','sexo' => '1','fechaNacimiento' => '1992-09-23','telefono1' => '54820872','Vecindad' => ' San Miguel, Petén','factorSangre' => '2','grupoSangre' => '3','estado'=>'0']);
         /*seed de almacenes*/
-         DB::table('c_almacen')->insert(['nombre' => 'almacen1']);
-         DB::table('c_almacen')->insert(['nombre' => 'almacen2']);
+         DB::table('c_almacen')->insert(['nombre' => 'Celulas Rojas']);
+         DB::table('c_almacen')->insert(['nombre' => 'Plaquetas']);
+         DB::table('c_almacen')->insert(['nombre' => 'Plasma']);
         /*seed de congelador*/
          DB::table('c_congelador')->insert(['nombre' => 'congelador1']);
          DB::table('c_congelador')->insert(['nombre' => 'congelador2']);
@@ -74,6 +77,14 @@ class DatabaseSeeder extends Seeder
          /*seed de  Afecciones*/
          DB::table('u_afeccion')->insert(['cui' => '1234562141701','idTipoAfeccion'=>'1']);
          DB::table('u_afeccion')->insert(['cui' => '1234562141701','idTipoAfeccion'=>'3']);
+          /*seed de  Tipo Transaccion*/
+         DB::table('c_tipoTransaccion')->insert(['nombre' => 'Donacion']);
+         DB::table('c_tipoTransaccion')->insert(['nombre' => 'Retiro']);
+         // /*seed de  detalleTransaccion*/
+         // DB::table('t_detalleTransaccion')->insert(['idTransaccion' => '1','idUnidad' => '1']);
+         // DB::table('t_detalleTransaccion')->insert(['idTransaccion' => '1','idUnidad' => '2']);
+         // /*seed de  Transaccion*/
+         // DB::table('t_Transaccion')->insert(['idCliente' => '1','idUsuario' => '1','idTipoTransaccion' => '1','idAlmacen' => '1','idCongelador' => '1']);
          
 
     }
