@@ -94,7 +94,12 @@
  							title="Ingrese un telefono2 valido : 9999-9999">
 				          
 				          <label class="active"  for="emaile">telefono 2</label>
-				      </div>	    
+				      </div>
+				      <div class="input-field col s6">
+                                <input placeholder="Ingrese Nombre de peso" id="peso" name="peso" type="text" class="validate peso"  value=""
+                            title="Ingrese un peso valido : 999.99">
+                                <label class="active"  for="emaile">Peso Kg</label>
+                      </div>	    
 					<div class="row">
 						<div class="col-xs-3 col-xs-offset-9">
 							<button class="btn btn-floating btn-fab green  darken-1 waves-effect waves-light" type="submit"><i class="material-icons">create</i></button>
@@ -117,5 +122,6 @@ location.reload();
                 $("#cui").mask("9999-99999-9999");
                 $("#telefono1").mask("9999-9999");
                 $("#telefono2").mask("9999-9999");
+                // $("#peso").mask("999.99",{placeholder:"000.00"});
 
     	</script>

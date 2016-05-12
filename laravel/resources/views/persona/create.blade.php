@@ -72,11 +72,18 @@
                                 <label class="active"  for="nombree">Vecindad</label>
                             </div>        
                             <div class="input-field col s6">
-                                <input placeholder="Ingrese Nombre de fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" type="date" class="validate fechaNacimiento" value="" required
+                                <input placeholder="Ingrese Nombre de fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" type="date" class="validate fechaNacimiento datepicker" value="" required
                             title="Ingrese un fechaNacimiento valido">
                                 
                                 <label class="active"  for="emaile">Fecha de Nacimiento</label>
                             </div>
+                            <script type="text/javascript">
+                                $('.datepicker').pickadate({
+                              selectMonths: true, // Creates a dropdown to control month
+                              selectYears: 15 // Creates a dropdown of 15 years to control year
+                            });
+                                  
+                            </script>
                             <div class="input-field col s6">
                                 <input placeholder="Ingrese Nombre de telefono1" id="telefono1" name="telefono1" type="text" class="validate telefono1" value="" required
                             title="Ingrese un telefono1 valido : 9999-9999">
@@ -88,7 +95,12 @@
                             title="Ingrese un telefono2 valido : 9999-9999">
                                 
                                 <label class="active"  for="emaile">telefono 2</label>
-                            </div>      
+                            </div>
+                           <div class="input-field col s6">
+                                <input placeholder="Ingrese Nombre de peso" id="peso" name="peso" type="text" class="validate peso"  value=""
+                            title="Ingrese un peso valido : 999.99">
+                                <label class="active"  for="emaile">Peso Kg</label>
+                            </div>          
 
 
                       </div>
@@ -119,6 +131,7 @@ location.reload();
                 $("#cui").mask("9999-99999-9999");
                 $("#telefono1").mask("9999-9999");
                 $("#telefono2").mask("9999-9999");
+                // $("#peso").mask("999.99",{placeholder:"000.00"});
 
       </script>
 @endsection

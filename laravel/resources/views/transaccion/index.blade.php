@@ -25,12 +25,35 @@
   <ul class="collection">
 
   @foreach ($transaccions as $transaccion)
+        <!-- {{$unidad=App\TUnidad::find($transaccion->idUnidad)}} -->
+    <!-- {!!var_dump($tipoSangre=tipoSangre($unidad->idGrupoSangre,
+                                            $unidad->idFactorSangre))!!} -->
+        
     <li class="collection-item avatar">
-        <i class="material-icons circle green">call_received</i>
-        <span class="title">O+</span>
-        <p>
-          Donante: Luis Garcia <br>
-          ID: 1
+        <i class="material-icons circle 
+        {{$transac=App\TTransaccion::find($transaccion->idTransaccion)}}
+@if ($unidad->idEstadoUnidad==2)
+          black
+        ">call_received</i>
+@else
+        @if ($transac->idTipoTransaccion==1)
+          green
+        ">call_received</i>
+        @endif
+        @if ($transac->idTipoTransaccion==2)
+          red
+        ">call_made</i>
+        @endif
+        @if ($transac->idTipoTransaccion==3)
+          blue
+        ">call_split</i>
+        @endif
+
+@endif        
+        <span class="title">{{$tipoSangre['nombre']}}</span>
+        <p>         
+          Unidad #: {{$transaccion->idUnidad}} de Transaccion #:{{$transaccion->idTransaccion}}<br>
+          Contenido: {{$unidad->contenido}}ml
         </p>
       <div class="secondary-content">
         <a href="{{ url($mid.'/transaccion/'.$transaccion->idTransaccion.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
@@ -38,7 +61,7 @@
                                 remove_red_eye
                               </i>
         </a>
-         <a href="{{ url($mid.'/transaccion/'.$usutransaccionario->idTransaccion.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
+         <a href="{{ url($mid.'/transaccion/'.$transaccion->idTransaccion.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
                             <i class="material-icons" style="  vertical-align: top;">
                               create
                             </i>
@@ -57,7 +80,7 @@
   </ul> 
 </div>
         </div>      
-  <div id="titulo" class="panel-footer">
+  <!-- <div id="titulo" class="panel-footer">
     <ul class="collection">
       <li class="collection-item avatar">
         <i class="material-icons circle green">call_received</i>
@@ -77,14 +100,14 @@
         <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
       </li>
     </ul>  
-  </div>
+  </div> -->
 </div>
   
           
   <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
-      <button class="btn-floating btn-large green tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo" type="submit">
-        <i class="material-icons">add</i>
-      </button>
+      <a class="btn-floating btn-large green tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo" type="submit" href="{{ url($mid.'/transaccion/create/valida') }}">
+        <i class="material-icons"  style="vertical-align: top">add</i>
+      </a>
       
     </div>
 

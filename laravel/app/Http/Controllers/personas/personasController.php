@@ -71,6 +71,7 @@ public function update($id,Request $request)
         $persona->sexo=$request->input('sexo');
         $persona->grupoSangre=$request->input('grupoSangre');
         $persona->factorSangre=$request->input('factorSangre');
+        $persona->peso=$request->input('peso');
         $persona->fechaNacimiento=$request->input('fechaNacimiento');
         $persona->save();
         $mid=mid();

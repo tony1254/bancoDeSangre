@@ -54,8 +54,13 @@ Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function
 	/*Rutas de formularios para USUARIo*/
 		Route::resource('usuario', 'usuarios\usuarioController');
 		Route::get('usuario/busqueda', 'usuarios\usuarioController@busqueda');
-	/*Rutas de formularios para USUARIo*/
+	/*Rutas de formularios para SANGRE*/
+		Route::resource('sangre', 'sangre\sangreController');
+		Route::resource('unidad', 'sangre\unidadController');
+	/*Rutas de formularios para transacciones*/
 		Route::resource('transaccion', 'transaccion\transaccionController');
+		Route::get('transaccion/create/valida', 'transaccion\transaccionController@valida');
+		Route::post('transaccion/create/valida', 'transaccion\transaccionController@create');
 		
 
 	//Route::resource('persona', 'PersonaController');

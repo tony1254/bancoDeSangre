@@ -14,7 +14,7 @@ class CreateTDetalleTransaccionTable extends Migration
     {
         Schema::create('t_detalleTransaccion', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idTransccion');
+            $table->integer('idTransaccion');
             $table->integer('idUnidad');
             $table->timestamps();
         });

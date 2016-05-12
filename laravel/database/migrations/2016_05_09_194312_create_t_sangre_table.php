@@ -17,8 +17,12 @@ class CreateTSangreTable extends Migration
             $table->integer('idGrupoSangre');
             $table->integer('idFactorSangre');
             $table->integer('idAlmacen');
-            $table->integer('idCongelador');
-            $table->integer('cantidad');
+            $table->integer('sangreTotal');
+            $table->integer('hematies');
+            $table->integer('plaquetas');
+            $table->integer('plasma');
+            $table->integer('cuarentena');
+            
             $table->timestamps();
         });
     }

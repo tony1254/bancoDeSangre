@@ -15,8 +15,14 @@ class CreateTUnidadTable extends Migration
         Schema::create('t_unidad', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idSangre');
+            $table->integer('idHemoderivado');
+            $table->integer('idAlmacen');
+            $table->integer('idCongelador');
+            $table->integer('idGrupoSangre');
+            $table->integer('idFactorSangre');
             $table->date('caduca');
-            $table->integer('estado');
+            $table->decimal('contenido', 5, 2);
+            $table->integer('idEstadoUnidad');
             $table->timestamps();
         });
     }

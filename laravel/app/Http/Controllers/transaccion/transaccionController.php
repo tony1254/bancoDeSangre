@@ -13,6 +13,10 @@ use App\UAfeccion;
 use App\CTipoAfeccion;
 use App\TDetalleTransaccion;
 use App\TTransaccion;
+use App\TSangre;
+use App\TUnidad;
+use App\CAlmacen;
+use App\CCongelador;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -49,72 +53,43 @@ class transaccionController extends Controller
    */
 public function index(Request $request)
    {
+$msj='';
 if (empty($request->input('search'))) {
-     $detalle=TDetalleTransaccion::paginate(10);
+     $detalle=TDetalleTransaccion::whereBetween('created_at', array(date('Y-m-d  H:i:s', time()-86400),date('Y-m-d  H:i:s', time())))->paginate(10);
         return view('transaccion/index', ['transaccions' => $detalle,'mid'=>mid()]);
 }else{
 /**
    *busqueda
    */
   $busqueda=$request->input('search');
-  $busqueda=str_replace ( '-', '' , $busqueda);
-     $personas=Persona::where('cui','like','%'.$busqueda.'%'  )->orWhere('nombre','like','%'.$busqueda.'%'  )->orWhere('apellido','like','%'.$busqueda.'%'  )->paginate(10);
-        return view('persona/index', ['personas' => $personas,'mid'=>mid(),'busqueda'=>$busqueda]);
-
+$detalle=TDetalleTransaccion::where('idTransaccion',$busqueda)->paginate(10);
+$msj=$request->input('msj');
+        return view('transaccion/index', ['transaccions' => $detalle,'msj'=>$msj,'mid'=>mid()]);
 }
    }
 
 public function show($id,Request $request)
    {
-    $persona=Persona::find($id);
+    $transaccion=TTransaccion::find($id);
+    $persona=Persona::find($transaccion->idCliente);
+    $usuario=User::find($transaccion->idUsuario);
+    $detalles=TDetalleTransaccion::where('idTransaccion',$transaccion->id)->get();
     if(!empty($request->input('msj'))){
-        return view('persona/show', ['msj'=>$request->input('msj'),'mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>$persona,'afecciones'=>UAfeccion::where('cui',$persona->cui)->get()]);
+        return view('transaccion/show', ['msj'=>$request->input('msj'),'mid'=>mid(),'transaccion'=>$transaccion]);
 
     }
-        return view('persona/show', ['mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>$persona,'afecciones'=>UAfeccion::where('cui',$persona->cui)->get()]);
+        return view('transaccion/show', ['mid'=>mid(),'transaccion'=>$transaccion,'persona'=>$persona,'usuario'=>$usuario,'detalles'=>$detalles]);
         return "show";    
    }
-      /**
-   *FUncion para Afecciones
+/**
+   *FUncion para Validacion
    */
-public function afeccionGet($id)
+public function valida()
    {
-    $persona=Persona::find($id);
-    
-        return view('persona/afeccionesAdd', ['mid'=>mid(),'persona'=>$persona,'afecciones'=>CTipoAfeccion::all()]);
+        return view('transaccion/valida', ['mid'=>mid()]);
         return "show";    
    }
-      /**
-   *FUncion para post de afeccion
-   */
-public function afeccionAdd($id,Request $request)
-   {
-    $persona=Persona::find($id);
-    $persona->estado=0;
-    $persona->save();
-$afeccion=new UAfeccion;
-$afeccion->cui=$persona->cui;
-$afeccion->idTipoAfeccion=$request->input('afeccion');
-$afeccion->save();
-        return redirect()->to(mid().'/persona/'.$persona->id.'?msj=Nueva Afeccion Agregada exitosamente');
-   }      /**
-   *FUncion para eliminar de afeccion
-   */
-public function afeccionEliminar($idp,$ida,Request $request)
-   {
 
-    $afeccion=UAfeccion::find($ida);
-    $cui=$afeccion->cui;
-    $afeccion->delete();
-    $afecciones=UAfeccion::where('cui',$cui)->get();
-
-    if (count($afecciones)==0) {
-      $persona=Persona::find($idp);
-      $persona->estado=1;
-      $persona->save();
-    }
-        return redirect()->to(mid().'/persona/'.$idp.'?msj=Afeccion Eliminada exitosamente');
-   }
    /**
    *FUncion para editar
    */
@@ -127,29 +102,77 @@ public function edit($id)
    /**
    *FUncion para Crear
    */
-public function create()
+public function create(Request $request)
    {
+    $persona= Persona::where('cui',str_replace('-', '', $request->get('cui')))->first();
         
-        return view('persona/create', ['mid'=>mid(),'sexos'=>CSexo::all()]);
+      if (count($persona)==0) {
+        return view('transaccion/valida', ['msj'=>'Persona no encontrada','mid'=>mid()]);
+      }
+        return view('transaccion/create', ['mid'=>mid(),
+          'persona'=> $persona,
+          'almacenes'=>CAlmacen::all(),
+          'congeladores'=>CCongelador::all(),
+          ]);
 
    }
 public function store(Request $request)
    {
-         $persona=new Persona;
-        $persona->nombre=$request->input('nombre');
-        $persona->apellido=$request->input('apellido');
-        $persona->vecindad=$request->input('vecindad');
-        $persona->telefono1=$request->input('telefono1');
-        $persona->telefono2=$request->input('telefono2');
-        $persona->cui=str_replace('-', '', $request->get('cui'));
-        $persona->email=$request->input('email');
-        $persona->sexo=$request->input('sexo');
-        $persona->grupoSangre=$request->input('grupoSangre');
-        $persona->factorSangre=$request->input('factorSangre');
-        $persona->fechaNacimiento=$request->input('fechaNacimiento');
-        $persona->save();  
-        return redirect()->to(mid().'/persona?search='.$persona->cui);
-         
+        $persona=persona::find($request->input('persona'));
+      if (count($persona)==0) {
+        return view('transaccion/valida', ['msj'=>'Persona no encontrada','mid'=>mid()]);
+      }
+        $sangre=TSangre::where('idGrupoSangre',$persona->grupoSangre)
+                        ->where('idFactorSangre',$persona->factorSangre)
+                        ->where('idAlmacen',$request->input('almacen'))
+                        ->first();
+        /*Creando Nuevo recuento de Sangre Si no existe*/
+      if(count($sangre)==0)
+        {
+          $sangre= new TSangre;
+          $sangre->idGrupoSangre=$persona->grupoSangre;
+          $sangre->idFactorSangre=$persona->factorSangre;
+          $sangre->idAlmacen=$request->input('almacen');
+          $sangre->save();
+        }
+        /*Creando Unidad de Sangre*/
+        $unidad=new TUnidad;
+        $unidad->idSangre=$sangre->id;
+        $unidad->idHemoderivado=1;//Sangre Total
+        $unidad->idAlmacen=$request->input('almacen');
+        $unidad->idCongelador=$request->input('congelador');
+        $unidad->idGrupoSangre=$persona->grupoSangre;
+        $unidad->idFactorSangre=$persona->factorSangre;
+        $unidad->caduca= date('Y-m-d', time()+86400*25 );//Sangre total caduca en un mes
+        $unidad->contenido=$request->input('contenido');
+        if ($persona->estado==1) {
+          $unidad->idEstadoUnidad=1;//estado Activo
+        }else{
+          $unidad->idEstadoUnidad=2;//estado Inactivo
+        }
+        $unidad->save();
+        /*Creando Transaccion*/
+        $transaccion=new TTransaccion;
+        $transaccion->idCliente=$persona->id;
+        $transaccion->idUsuario=Auth::user()->id;
+        $transaccion->idAlmacen=$request->input('almacen');
+        $transaccion->idTipoTransaccion=1;//Donacion
+        $transaccion->save();
+        /*Creando Detalle Transaccion*/
+        $detalle=new TDetalleTransaccion;
+        $detalle->idTransaccion=$transaccion->id;
+        $detalle->idUnidad=$unidad->id;
+        $detalle->save();
+        /*Incrementa en Sangre*/
+        if ($persona->estado==1) {
+          $sangre->sangreTotal=$sangre->sangreTotal+1;
+        }else{
+          $sangre->cuarentena=$sangre->cuarentena+1;
+        }
+        $sangre->save();
+        return redirect()->to(mid().'/transaccion?search='.$detalle->idTransaccion.'&msj=Nueva Donacion Graba Exitosamente');
+
+        
         return "store";    
    }
    /**

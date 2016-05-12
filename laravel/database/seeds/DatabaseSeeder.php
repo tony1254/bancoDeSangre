@@ -52,16 +52,23 @@ class DatabaseSeeder extends Seeder
          DB::table('persona')->insert(['email' => 'Luis@luis.com','cui' => '2145800082214','nombre' => 'Luis Antonio','apellido' => 'Garcia Aguirre','sexo' => '1','fechaNacimiento' => '1992-09-23','telefono1' => '54820872','Vecindad' => ' San Benito Petén','factorSangre' => '1','grupoSangre' => '4']);
          DB::table('persona')->insert(['email' => 'juan@juan.com','cui' => '1234562141701','nombre' => 'Juan Antonio','apellido' => 'Ramirez','sexo' => '1','fechaNacimiento' => '1992-09-23','telefono1' => '54820872','Vecindad' => ' San Miguel, Petén','factorSangre' => '2','grupoSangre' => '3','estado'=>'0']);
         /*seed de almacenes*/
-         DB::table('c_almacen')->insert(['nombre' => 'Celulas Rojas']);
-         DB::table('c_almacen')->insert(['nombre' => 'Plaquetas']);
-         DB::table('c_almacen')->insert(['nombre' => 'Plasma']);
+         DB::table('c_almacen')->insert(['nombre' => 'San Benito']);
+         DB::table('c_almacen')->insert(['nombre' => 'Santa Elena']);
         /*seed de congelador*/
-         DB::table('c_congelador')->insert(['nombre' => 'congelador1']);
-         DB::table('c_congelador')->insert(['nombre' => 'congelador2']);
+         DB::table('c_congelador')->insert(['nombre' => 'Sangre total']);
+         DB::table('c_congelador')->insert(['nombre' => 'Hematíes']);
+         DB::table('c_congelador')->insert(['nombre' => 'Plaquetas']);
+         DB::table('c_congelador')->insert(['nombre' => 'Plasma']);
         /*seed de Estado de Unidades*/
-         DB::table('c_estadoSangre')->insert(['nombre' => 'Activa']);
-         DB::table('c_estadoSangre')->insert(['nombre' => 'Inactiva']);
-         DB::table('c_estadoSangre')->insert(['nombre' => 'Caducada']);
+         DB::table('c_estadoUnidad')->insert(['nombre' => 'Activa']);
+         DB::table('c_estadoUnidad')->insert(['nombre' => 'Inactiva']);
+         DB::table('c_estadoUnidad')->insert(['nombre' => 'Procesada']);
+         DB::table('c_estadoUnidad')->insert(['nombre' => 'Caducada']);
+         /*seed de Hemoderivado*/
+         DB::table('c_hemoderivado')->insert(['nombre' => 'Sangre total']);
+         DB::table('c_hemoderivado')->insert(['nombre' => 'Hematíes']);
+         DB::table('c_hemoderivado')->insert(['nombre' => 'Plaquetas']);
+         DB::table('c_hemoderivado')->insert(['nombre' => 'Plasma']);
          /*seed de Grupo de Unidades*/
          DB::table('c_grupoSangre')->insert(['nombre' => 'A']);
          DB::table('c_grupoSangre')->insert(['nombre' => 'B']);
@@ -80,6 +87,10 @@ class DatabaseSeeder extends Seeder
           /*seed de  Tipo Transaccion*/
          DB::table('c_tipoTransaccion')->insert(['nombre' => 'Donacion']);
          DB::table('c_tipoTransaccion')->insert(['nombre' => 'Retiro']);
+         DB::table('c_tipoTransaccion')->insert(['nombre' => 'Procesamiento']);
+         /*seed de SANGRE*/
+         DB::table('t_sangre')->insert(['idFactorSangre' => '1','idGrupoSangre' => '1','idAlmacen' => '1']);
+         DB::table('t_sangre')->insert(['idFactorSangre' => '2','idGrupoSangre' => '1','idAlmacen' => '1']);
          // /*seed de  detalleTransaccion*/
          // DB::table('t_detalleTransaccion')->insert(['idTransaccion' => '1','idUnidad' => '1']);
          // DB::table('t_detalleTransaccion')->insert(['idTransaccion' => '1','idUnidad' => '2']);

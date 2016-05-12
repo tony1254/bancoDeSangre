@@ -4,13 +4,16 @@
 @section('content')
 
 <div class="panel panel-default" id="ver2">
-            <div class="panel-heading">Persona</div>
+            <div class="panel-heading">Transaccion</div>
             <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                
             @if (count($persona)==0)
               Aun no hay Persona Vinculada
             @else
 
-<!-- {{$mid=mid()}} -->
+
 
             <script type="text/javascript">
               function editarper(){
@@ -19,7 +22,17 @@
             $( '#test4' ).load( '\\{{$mid}}/personas/{{$persona->id}}/edit' );
           }
             </script>
-          <b>Nombre:</b>
+
+         
+<b>
+@if ($transaccion->idTipoTransaccion==1||$transaccion->idTipoTransaccion==3)
+  Donador
+@endif @if ($transaccion->idTipoTransaccion==2)
+  Paciente
+@endif
+</b>
+<hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+             <b>Nombre:</b>
           {{$persona->nombre.' '.$persona->apellido}}
           <br>
           <b>CUI:</b>
@@ -67,40 +80,69 @@
           
             @endif
 
+              </div>
+              <div class="col-sm-6">
+<b>Receptor del Banco de Sangre</b>
+<hr style="width: 100%; color: black; height: 1px; background-color:black;" />                
+          <b>Nombre de Usuario:</b> {{$usuario->name}}
+          <br>
+                    
+          <b>CUI:</b> {{substr($usuario->cui , 0, 4)}}-{{substr($usuario->cui , 4, 5)}}-{{substr($usuario->cui , 9, 4)}}
+          <br>
+          <b>Email: </b>{{$usuario->email}}
+          <br>
+          <b>Rol:</b> {{App\CRol::find($usuario->rol)->nombre}}
+              </div>
+            </div>
           </div>
+<div class="row">
+  <div class="col-sm-12">
+    
+<b>Detalle</b>
+<hr style="width: 100%; color: black; height: 1px; background-color:black;" />  
+
+  <ul class="collection">
+ @foreach ($detalles as $detalle)
+        <!-- {{$unidad=App\TUnidad::find($detalle->idUnidad)}} -->
+    <!-- {!!var_dump($tipoSangre=tipoSangre($unidad->idGrupoSangre,
+                                            $unidad->idFactorSangre))!!} -->
+    <li class="collection-item avatar">
+        <i class=" circle 
+        @if ($unidad->idEstadoUnidad==1)
+            {{$tipoSangre['color']}}
+          @else
+            black
+        @endif
+        ">{{$tipoSangre['nombre']}}</i>
+
+        
+        <span class="title">  Unidad #: {{$detalle->idUnidad}} </span>
+        <p>         
+          Vence:  {{substr($unidad->caduca,8,2)}}-{{substr($unidad->caduca,5,2)}}-{{substr($unidad->caduca,0,4)}}<br>
+          Contenido: {{$unidad->contenido}}ml
+        </p>
+      <div class="secondary-content">
+        <a href="{{ url($mid.'/unidad/'.$detalle->idUnidad.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
+                              <i class="material-icons" style="  vertical-align: top;">
+                                remove_red_eye
+                              </i>
+        </a>
+         <a href="{{ url($mid.'/unidad/'.$detalle->idUnidad.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
+                            <i class="material-icons" style="  vertical-align: top;">
+                              create
+                            </i>
+         </a>
+      </div>
+    </li>
+  @endforeach     
+  </ul>   
+  </div>
+</div>
       <div class="panel-footer">
       Afecciones
           
         </div>
-      <div id="afeecion">
-            <div class="col-xs-3 col-xs-offset-9">
-              <a id="boton"class="btn btn-floating btn-fab-mini green  darken-3 waves-effect waves-light tooltipped
-                @if (count($persona)==0)
-                disabled
-                @endif
-              "data-position="left" data-delay="0" data-tooltip="Agregar afecciones a Persona"  onclick="afeccoiAdd()"><i class="material-icons "style="  vertical-align: top;" >add</i></a>
-          </div>
-          @if (count($afecciones)>0)
-            <table class=" table table-hover table-responsive table-condensed">
-              <tr><th width="150">Afecciones</th><th>Acciones</th></tr>
-              @foreach ($afecciones as $afeccion)
-                <tr>
-                  <td width="150" style="  vertical-align: middle;"> {{App\CTipoAfeccion::find($afeccion->idTipoAfeccion)->nombre}}</td>
-                  <td width="350" >
-                  <form class="form" role="form" method="POST" action="{{ url($mid.'/persona/'.$persona->id.'/afeccionEliminar/'.$afeccion->id) }}">
-                        {!! csrf_field() !!}
-                  <input type="text" name="_method" value="DELETE" hidden>
-                      <button class="btn btn-floating btn-fab-mini red  darken-3 waves-effect waves-light tooltipped"
-                      data-position="left" data-delay="50" data-tooltip="Eliminar" type="sumit">
-                          <i class="material-icons"   style="  vertical-align: top;">delete_forever</i>
-                      </button>
-                  </form>
-                  </td>
-                </tr>
-              @endforeach
-            </table>
-          @endif
-      </div>
+    
         <script type="text/javascript">
           function afeccoiAdd(){
         $('.tooltipped').tooltip('remove');

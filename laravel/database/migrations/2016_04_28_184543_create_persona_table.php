@@ -25,6 +25,7 @@ class CreatePersonaTable extends Migration
             $table->string('email')->unique();
             $table->integer('grupoSangre');
             $table->integer('factorSangre');
+            $table->decimal('peso', 5, 2);
             $table->integer('estado')->default(1);
 
             $table->timestamps();

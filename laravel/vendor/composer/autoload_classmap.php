@@ -13,6 +13,7 @@ return array(
     'CreateCEstadoUnidadTable' => $baseDir . '/database/migrations/2016_04_28_185227_create_c_estadoUnidad_table.php',
     'CreateCFactorSangreTable' => $baseDir . '/database/migrations/2016_04_28_185205_create_c_factorSangre_table.php',
     'CreateCGrupoSangreTable' => $baseDir . '/database/migrations/2016_04_28_185149_create_c_grupoSangre_table.php',
+    'CreateCHemoderivadoTable' => $baseDir . '/database/migrations/2016_05_10_112901_create_c_hemoderivado_table.php',
     'CreateCRolsTable' => $baseDir . '/database/migrations/2016_04_20_233838_create_c_rols_table.php',
     'CreateCSexoTable' => $baseDir . '/database/migrations/2016_04_28_185120_create_c_sexo_table.php',
     'CreateCTipoAfeccionTable' => $baseDir . '/database/migrations/2016_04_28_185041_create_c_tipoAfeccion_table.php',

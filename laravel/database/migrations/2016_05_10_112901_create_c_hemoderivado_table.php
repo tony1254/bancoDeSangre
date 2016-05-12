@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTTransaccionTable extends Migration
+class CreateCHemoderivadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,9 @@ class CreateTTransaccionTable extends Migration
      */
     public function up()
     {
-        Schema::create('t_transaccion', function (Blueprint $table) {
+        Schema::create('c_hemoderivado', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idCliente');
-            $table->integer('idUsuario');
-            $table->integer('idTipoTransaccion');
-            $table->integer('idAlmacen');
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateTTransaccionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('t_transaccion');
+        Schema::drop('c_hemoderivado');
     }
 }

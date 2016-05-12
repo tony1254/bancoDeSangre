@@ -9,6 +9,7 @@ use App\CFactorSangre;
 use App\CGrupoSangre;
 use App\CTipoAfeccion;
 use App\CTipoTransaccion;
+use App\CHemoderivado;
 
 use App\Persona;
 function currentUser()
@@ -61,6 +62,8 @@ function datosCatalogo($catalogo)
             $datos=CEstadoUnidad::all();
         }else if($catalogo=="tipoTransaccion"){
             $datos=CTipoTransaccion::all();
+        }else if($catalogo=="hemoderivado"){
+            $datos=CHemoderivado::all();
         }else {
             return "index de else";
         }
@@ -87,6 +90,8 @@ function nuevoCatalogo($catalogo)
             $datos=new CEstadoUnidad;
         }else if($catalogo=="tipoTransaccion"){
             $datos=new CTipoTransaccion;
+        }else if($catalogo=="hemoderivado"){
+            $datos=new CHemoderivado;
         }else {
             return "index de else";
         }
@@ -113,6 +118,8 @@ function datoCatalogo($catalogo,$id)
             $datos=CEstadoUnidad::find($id);
         }else if($catalogo=="tipoTransaccion"){
             $datos=CTipoTransaccion::find($id);
+        }else if($catalogo=="hemoderivado"){
+            $datos=CHemoderivado::find($id);
         }else {
             return "index de else";
         }
@@ -132,6 +139,17 @@ Las personas AB puede recibir no solo de AB sino de A,B y O, porque no tiene Ant
 En cuanto al factor Rh, los positivos pueden recibir de los negativos pero los negativos solo de los negativos porque estos poseen anticuerpos contra el positivo.
 
 
+*/
+/**
+*Productos*
+
+Sangre entera: bolsa de sangre de 450 mL que se conserva refrigerada con CPDA-1. Estas bolsas tienen una fecha de caducidad de 30 días tras la extracción.
+
+Plasma fresco congelado: plasma obtenido antes de las 6 horas siguientes a la extracción sanguínea y que se mantiene a temperaturas inferiores a -18ºC, teniendo una caducidad de un año.
+
+Plasma congelado: plasma que se obtiene a partir de una unidad de sangre que ha sido extraída en un período superior a 6 horas o bien, el plasma fresco que ha permanecido congelado más de un año y que tiene una caducidad de 4 años.
+
+Concentrado de hematíes: obtenido tras la centrifugación de una unidad de sangre, desechando el plasma que queda en la parte superior. Puede ser usado durante los siguientes 30 días, manteniéndose entre 2-8 ºC.
 */
 
 function tipoSangre($grupo,$factor){
@@ -160,9 +178,17 @@ function tipoSangre($grupo,$factor){
     }else if($grupo==4 && $factor==1)// O+      39%
     {
          $color='deep-orange ';
+    }else{
+         $color='purple';
     }
+
     $grupo=CGrupoSangre::find($grupo);
     $factor=CFactorSangre::find($factor);
+if (empty($grupo)||empty($factor)) {
+    return array('nombre' => 'N/A',
+                 'color' => $color);
+    
+}
     return  array('nombre' => $grupo->nombre.$factor->nombre,
                  'color' => $color);
 }

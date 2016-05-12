@@ -48,6 +48,9 @@
 				<a href="{{ url($mid.'/catalogos/grupoSangre') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-tint fa-2x" aria-hidden="true"></i>
 					Grupos de Sangre
 				</a>
+				<a href="{{ url($mid.'/catalogos/hemoderivado') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-tint fa-2x" aria-hidden="true"></i>
+					Hemoderivados
+				</a>
 				<a href="{{ url($mid.'/catalogos/tipoAfeccion') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-stethoscope fa-2x" aria-hidden="true"></i>
 					Tipos de Afecciones
 				</a>
@@ -70,8 +73,15 @@
       </p></div>
     </li>
     <li>
-      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-      <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+      <div class="collapsible-header"><i class="material-icons">whatshot</i>Transacciones</div>
+      <div class="collapsible-body"><p>
+				<a href="{{ url($mid.'/transaccion/') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-exchange fa-2x" aria-hidden="true"></i>
+					Trannsacciones
+				</a>
+				<a href="{{ url($mid.'/sangre') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-exchange fa-2x" aria-hidden="true"></i>
+					Sangre por Congeladores
+				</a>			
+      </p></div>
     </li>
   </ul>
         
@@ -201,6 +211,9 @@ function ocultar(){
 					<b>Telefono 2:</b>
 					{{$persona->telefono2}}
 					 <br>
+			          <b>Peso:</b>
+			          {{$persona->peso}}Kg
+			          <br>
 			          <b>Estado:</b>
 			          @if ($persona->estado==1)
 			              <font color="green">

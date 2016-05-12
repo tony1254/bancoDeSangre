@@ -140,18 +140,47 @@ public function create()
    }
 public function store(Request $request)
    {
+    $date=date_create($request->input('fechaNacimiento'));
+
+
+       
+         $persona= Persona::where('cui',str_replace('-', '', $request->get('cui')))->orWhere('email',$request->input('email'))->first();
+if (count($persona)==1) {
+return view('persona/show', ['msj'=>'Campos Repetidos','mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>$persona,'afecciones'=>UAfeccion::where('cui',$persona->cui)->get()]);  
+}
          $persona=new Persona;
         $persona->nombre=$request->input('nombre');
         $persona->apellido=$request->input('apellido');
         $persona->vecindad=$request->input('vecindad');
         $persona->telefono1=$request->input('telefono1');
         $persona->telefono2=$request->input('telefono2');
+        // $request->get('cui')=str_replace('-', '', $request->get('cui'));
         $persona->cui=str_replace('-', '', $request->get('cui'));
         $persona->email=$request->input('email');
         $persona->sexo=$request->input('sexo');
         $persona->grupoSangre=$request->input('grupoSangre');
         $persona->factorSangre=$request->input('factorSangre');
-        $persona->fechaNacimiento=$request->input('fechaNacimiento');
+        $persona->peso=$request->input('peso');
+        $persona->fechaNacimiento=date_format($date,"Y-m-d");
+
+        // $v = \Validator::make($persona, [
+        //     'email' => 'required|email|max:255|unique:users',
+        //     'cui' => 'required|unique:persona',
+        //     'contrasena' => 'min:6'
+        //     ],[
+        //     'unique' => 'Usuario ya existente',
+        //     'min' => 'Contraseña no cumple con el tamaño minimo',
+        //     'required' => 'Falto llenar campos',
+        //     ]);
+             
+        //       if ($v->fails())
+        //         {
+        //             return redirect()->back()->withInput()->withErrors($v->errors());
+        //         }   
+             
+
+
+
         $persona->save();  
         return redirect()->to(mid().'/persona?search='.$persona->cui);
          
@@ -162,6 +191,14 @@ public function store(Request $request)
    */   
 public function update($id,Request $request)
    {
+    $date=date_create($request->input('fechaNacimiento'));
+
+ $persona= Persona::where('cui',str_replace('-', '', $request->get('cui')))->orWhere('email',$request->input('email'))->first();
+if($persona->id!=$id){
+  if (count($persona)==1) {
+  return view('persona/show', ['msj'=>'ERROR: Ya Existe este usuario','mid'=>mid(),'sexos'=>CSexo::all(),'persona'=>$persona,'afecciones'=>UAfeccion::where('cui',$persona->cui)->get()]);  
+  }
+}
          $persona= Persona::find($id);
         $persona->nombre=$request->input('nombre');
         $persona->apellido=$request->input('apellido');
@@ -173,7 +210,8 @@ public function update($id,Request $request)
         $persona->sexo=$request->input('sexo');
         $persona->grupoSangre=$request->input('grupoSangre');
         $persona->factorSangre=$request->input('factorSangre');
-        $persona->fechaNacimiento=$request->input('fechaNacimiento');
+        $persona->peso=$request->input('peso');
+        $persona->fechaNacimiento=date_format($date,"Y-m-d");
         // $persona->estado=$request->input('estado');
         $persona->save();  
         return redirect()->to(mid().'/persona?search='.$persona->cui);

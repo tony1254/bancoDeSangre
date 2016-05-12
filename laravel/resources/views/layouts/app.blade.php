@@ -18,7 +18,24 @@
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/font-awesome.min.css">
     <link href="/bower_components\material-design-icons\iconfont\material-icons.css" rel="stylesheet">
 
-
+        <style type="text/css">
+            tab1 { padding-left: 4em; }
+            tab2 { padding-left: 8em; }
+            tab3 { padding-left: 12em; }
+            tab4 { padding-left: 16em; }
+            tab5 { padding-left: 20em; }
+            tab6 { padding-left: 24em; }
+            tab7 { padding-left: 28em; }
+            tab8 { padding-left: 32em; }
+            tab9 { padding-left: 36em; }
+            tab10 { padding-left: 40em; }
+            tab11 { padding-left: 44em; }
+            tab12 { padding-left: 48em; }
+            tab13 { padding-left: 52em; }
+            tab14 { padding-left: 56em; }
+            tab15 { padding-left: 60em; }
+            tab16 { padding-left: 64em; }
+        </style>
 
 <style type="text/css">   
 ul.side-nav li a
@@ -115,7 +132,7 @@ ul.tabs li a
                         <ul id="link" class="dropdown-content">
                                 <li class="divider"></li>
                                 <li>
-                                     <a href="{{ url('/admin') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-exchange "></i>&nbsp;&nbsp;Transacciones</a>
+                                     <a href="{{ url(mid().'/transaccion') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-exchange "></i>&nbsp;&nbsp;Transacciones</a>
                                 </li>
                                 <li>
                                      <a href="{{ url('/admin/usuario') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-users "></i>&nbsp;&nbsp;Usuarios</a>
@@ -204,7 +221,7 @@ ul.tabs li a
         
               <!-- Dropdown Trigger -->
               <li>
-                <a class=" nounderline " href="{{ url('/home') }}" >
+                <a class=" nounderline " href="{{ url(mid().'/transaccion') }}" >
                   <div class="col-xs-2 " >
                      <span class="fa fa-retweet  "aria-hidden="true" ></span>
                 </div>
@@ -253,7 +270,18 @@ ul.tabs li a
 
 
 <div>
-  
+ @if (isset($msj))
+  <script type="text/javascript">
+      function alerta(texto){
+
+      Materialize.toast(texto, 5000, 'rounded') // 'rounded' is the class I'm applying to the toast
+      }
+
+  </script>
+          <script type="text/javascript">
+              alerta('{{$msj}}');
+          </script>
+@endif 
 @yield('content')
 </div> 
 
