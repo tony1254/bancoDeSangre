@@ -22,6 +22,7 @@ class CreateTSangreTable extends Migration
             $table->integer('plaquetas');
             $table->integer('plasma');
             $table->integer('cuarentena');
+            $table->integer('minimo');
             
             $table->timestamps();
         });

@@ -121,18 +121,29 @@
           Vence:  {{substr($unidad->caduca,8,2)}}-{{substr($unidad->caduca,5,2)}}-{{substr($unidad->caduca,0,4)}}<br>
           Contenido: {{$unidad->contenido}}ml
         </p>
+<form class="form" role="form" method="POST" action="{{ url($mid.'/unidad/'.$unidad->id) }}">
       <div class="secondary-content">
-        <a href="{{ url($mid.'/unidad/'.$detalle->idUnidad.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
+        <a href="{{ url($mid.'/unidad/'.$detalle->idUnidad.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent tooltipped" data-position="top" data-delay="50" data-tooltip="Ver">
                               <i class="material-icons" style="  vertical-align: top;">
                                 remove_red_eye
                               </i>
         </a>
-         <a href="{{ url($mid.'/unidad/'.$detalle->idUnidad.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
-                            <i class="material-icons" style="  vertical-align: top;">
-                              create
-                            </i>
-         </a>
+
+                 {!! csrf_field() !!}   
+<input type="text" name="_method" value="delete" hidden>
+         <button class=" btn   red-text waves-effect waves-red transparent tooltipped" type="sumit" name="transaccion" value="{{$detalle->idTransaccion}}"
+         @if ($unidad->idEstadoUnidad==1)
+          data-position="top" data-delay="50" data-tooltip="Inactivar">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+         @endif
+         @if ($unidad->idEstadoUnidad==2)
+          data-position="top" data-delay="50" data-tooltip="Inactivar">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+         @endif
+
+         </button>
       </div>
+</form>         
     </li>
   @endforeach     
   </ul>   
@@ -154,14 +165,14 @@ $( '#afeecion' ).load( '{{ url($mid.'/persona/'.$persona->id.'/afeccionAdd ') }}
 
   
   			 	
-  <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
+  <!-- <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
       
       <a class="btn btn-floating btn-fab amber  darken-3 waves-effect waves-light tooltipped
                 @if (count($persona)==0)
                 disabled
                 @endif
               "  data-position="left" data-delay="50" data-tooltip="Editar Persona" href="{{ url('/'.$mid.'/persona/'.$persona->id.'/edit') }}"><i class="material-icons">create</i></a>
-    </div>
+    </div> -->
 
   
 

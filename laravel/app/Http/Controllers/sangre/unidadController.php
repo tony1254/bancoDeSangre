@@ -11,6 +11,9 @@ use App\CSexo;
 use App\Persona;
 use App\TSangre;
 use App\TUnidad;
+use App\CAlmacen;
+use App\CCongelador;
+use App\TTransaccion;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -51,16 +54,16 @@ public function index(Request $request)
 $mid=mid();
 
 if (empty($request->input('search'))) {
-     $sangre=TSangre::paginate(10);
-        return view('sangre/index', ['sangres' => $sangre,'mid'=>$mid]);
+     $unidad=TUnidad::paginate(10);
+        return view('unidad/index', ['unidades' => $unidad,'mid'=>$mid]);
 }else{
    /**
    *busqueda
    */
   $busqueda=$request->input('search');
   $busqueda=str_replace ( '-', '' , $busqueda);
-     $sangre=TSangre::where('cui','like','%'.$busqueda.'%'  )->orWhere('name','like','%'.$busqueda.'%'  )->paginate(10);
-        return view('sangre/index', ['sangre' => $sangre,'mid'=>$mid,'busqueda'=>$busqueda]);
+     $unidades=TUnidad::where('id',$busqueda )->paginate(10);
+        return view('unidad/index', ['unidades' => $unidades,'mid'=>$mid,'busqueda'=>$busqueda]);
 
 }
 
@@ -69,10 +72,12 @@ if (empty($request->input('search'))) {
         return "index";    
    }
 
-public function show($id)
+public function show($id,Request $request)
    {
+    if(!empty($request->input('msj'))){
+        return view('unidad/show', ['msj'=>$request->input('msj'),'mid'=>mid(),'unidad'=>TUnidad::find($id)]);
+    }
         return view('unidad/show', ['mid'=>mid(),'unidad'=>TUnidad::find($id)]);
-        return "show";    
    }
    /**
    *FUncion para editar
@@ -89,7 +94,7 @@ public function edit($id)
 public function create()
    {
         
-        return view('usuario/create', ['mid'=>mid(),'roles'=>CRol::all()]);
+        return view('unidad/create', ['mid'=>mid(),'almacenes'=>CAlmacen::all(),'congeladores'=>CCongelador::all()]);
 
    }
 public function store(Request $request)
@@ -157,8 +162,18 @@ public function update($id,Request $request)
 
         return "update";    
    }
-public function destroy($id)
+public function destroy($id,Request $request)
    {
+    $unidad=TUnidad::find($id);
+    if ($unidad->idEstadoUnidad==2) {
+      $unidad->idEstadoUnidad=1;//estado Activar Unidad de Sangre
+      $msj='Unidad Activada';
+    }else{
+      $unidad->idEstadoUnidad=2;//estado Inactivar Unidad de Sangre
+      $msj='Unidad Inactivada';
+    }
+    $unidad->save();
+        return redirect()->to('admin/unidad/'.$unidad->id.'?msj='.$msj);
         return "destroy";    
    }
 

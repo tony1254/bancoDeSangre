@@ -28,34 +28,34 @@
     
     <li class="collection-item avatar">
     <!-- {!!var_dump($tipoSangre=tipoSangre($sangre->idGrupoSangre,$sangre->idFactorSangre))!!} -->
-      <i class="circle blue ">{{$tipoSangre['nombre']}}</i>
+      <i class="circle {{$tipoSangre['color']}} ">{{$tipoSangre['nombre']}}</i>
       <span class="title">{{App\CAlmacen::find($sangre->idAlmacen)->nombre}}</span>
       <div >
         <div class="col-sm-4">
-          Sangre Total: {{$sangre->sangreTotal}}@if ($sangre->sangreTotal<10)<font color="red">&nbsp Niveles Bajos</font>@endif
+          Sangre Total: {{$sangre->sangreTotal}}@if ($sangre->sangreTotal<$sangre->minimo)<font color="red">&nbsp Niveles Bajos</font>@endif
         </div>
         <div class="col-sm-4">
-          Hematíes: {{$sangre->hematies}}@if ($sangre->hematies<10)<font color="red">&nbsp Niveles Bajos</font>@endif
+          Hematíes: {{$sangre->hematies}}@if ($sangre->hematies<$sangre->minimo)<font color="red">&nbsp Niveles Bajos</font>@endif
         </div>        
       </div>
         <div >
           <div class="col-sm-4">
-            Plaquetas: {{$sangre->plaquetas}}@if ($sangre->plaquetas<10)<font color="red">&nbsp Niveles Bajo</font>@endif
+            Plaquetas: {{$sangre->plaquetas}}@if ($sangre->plaquetas<$sangre->minimo)<font color="red">&nbsp Niveles Bajo</font>@endif
           </div>
           <div class="col-sm-4">
-            Plasma: {{$sangre->plasma}}@if ($sangre->plasma<10)<font color="red">&nbsp Niveles Bajos</font>@endif
+            Plasma: {{$sangre->plasma}}@if ($sangre->plasma<$sangre->minimo)<font color="red">&nbsp Niveles Bajos</font>@endif
           </div>
           <div class="col-sm-4">
           	Cuarentena: {{$sangre->cuarentena}}
           </div>
         </div>
       <div class="secondary-content">
-           <a href="{{ url($mid.'/sangre/'.$sangre->id.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
+           <!-- <a href="{{ url($mid.'/sangre/'.$sangre->id.'') }}" class=" btn-xs   blue-text waves-effect waves-blue transparent">
                               <i class="material-icons" style="  vertical-align: top;">
                                 remove_red_eye
                               </i>
-        </a>
-       <a href="{{ url($mid.'/sangre/'.$sangre->id.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
+                   </a> -->
+       <a href="{{ url($mid.'/sangre/'.$sangre->id.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent tooltipped" data-position="left" data-delay="50" data-tooltip="Cambiar Minimo">
 									        <i class="material-icons" style="  vertical-align: top;">
 									        	create
 									        </i>
@@ -75,12 +75,12 @@
   </ul>	
 			 		 </div>
 			 	</div>
-<div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
-    <a class="btn-floating btn-large red tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo" href="{{ url($mid.'/sangre/create') }}">
+<!-- <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
+    <a class="btn-floating btn-large red tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo" href="{{ url($mid.'/sangre/create/minimo') }}">
 
-    	<i class="fa fa-plus"></i>
+      <i class="fa fa-plus"></i>
     </a>
     
-  </div>
+  </div> -->
 
 @endsection

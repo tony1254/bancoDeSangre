@@ -35,8 +35,26 @@
     </b>
   </font>
 @endif
+
           <br>
-          <b>estado: </b>{{App\CEstadoUnidad::find($unidad->idEstadoUnidad)->nombre}}
+          <b>estado: </b>
+@if ($unidad->idEstadoUnidad==2||$unidad->idEstadoUnidad==4)
+  <font color="red">
+    <b>
+      {{App\CEstadoUnidad::find($unidad->idEstadoUnidad)->nombre}}
+    </b>
+  </font>
+@else 
+  @if ($unidad->idEstadoUnidad==1)         
+  <font color="green">
+    <b>
+      {{App\CEstadoUnidad::find($unidad->idEstadoUnidad)->nombre}}
+    </b>
+  </font>
+  @else 
+      {{App\CEstadoUnidad::find($unidad->idEstadoUnidad)->nombre}}
+  @endif
+@endif
 
 
         </div>

@@ -15,13 +15,24 @@
   
       <form id="busqueda" class="form" role="form" method="get" action="{{ url($mid.'/transaccion') }}">
         <div class="input-field ">        
-          <input class="input-field" id="search" name="search" type="search" required placeholder="Ingrese Nombre,Apellido o DPI">
+          <input class="input-field" id="search" name="search" type="search" required placeholder="Ingrese numero de Transaccion">
           <label for="search"></label>
           <i class="material-icons" onclick="$('#titulo').toggle(); $('#busqueda').toggle(); $('#search').val('');">close</i>
         </div>
       </form>
 <div class="panel-footer">
+@if (count($transaccions)==0)
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 text-center">
+  <h4>
+    Hoy no hay Movimiento.
+  </h4>
+  <img src="{{ url('bower_components\contenido\donacion.png') }}" class="img-responsive" alt="Responsive image">
+    
+  </div>
+</div>
 
+@endif
   <ul class="collection">
 
   @foreach ($transaccions as $transaccion)
@@ -34,7 +45,7 @@
         {{$transac=App\TTransaccion::find($transaccion->idTransaccion)}}
 @if ($unidad->idEstadoUnidad==2)
           black
-        ">call_received</i>
+        ">remove</i>
 @else
         @if ($transac->idTipoTransaccion==1)
           green

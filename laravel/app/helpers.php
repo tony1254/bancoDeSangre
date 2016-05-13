@@ -16,6 +16,10 @@ function currentUser()
 {
     return auth()->user();
 }
+function atualizarSangre()
+{
+    return auth()->user();
+}
 /*Funcion para devolver el middleware donde se encuentra*/
 function mid()
 {

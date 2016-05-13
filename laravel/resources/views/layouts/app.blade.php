@@ -140,6 +140,9 @@ ul.tabs li a
                                 <li>
                                      <a href="{{ url('/'.mid().'/persona') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-universal-access "></i>&nbsp;&nbsp;Personas</a>
                                 </li>
+                                <li>
+                                     <a href="{{ url('/'.mid().'/reportes') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-flag"></i>&nbsp;&nbsp;Reportes</a>
+                                </li>
                                 <li class="divider"></li>
                                 <li>
                                      <a href="{{ url('/admin') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-user-md "></i>&nbsp;&nbsp;&nbsp;Perfil</a>
@@ -266,7 +269,9 @@ ul.tabs li a
             <script src="\bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
             <script src="\bower_components/Materialize/dist/js/materialize.min.js"></script>
             <script src="\bower_components/maskara.js"></script>
+            <script src="\bower_components/print.js"></script>
     
+            <script src="\bower_components/jquery/dist/jquery.PrintArea.js"></script>
 
 
 <div>

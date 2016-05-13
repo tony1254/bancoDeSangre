@@ -33,6 +33,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function(){
+	Route::get('/reportes', 'HomeController@reportes');
 	/*Rutas de formularios para Sesion de Usuario*/
 	Route::get('/', 'usuarios\usuariosController@index');	
 	Route::resource('usuarios', 'usuarios\usuariosController');
@@ -56,6 +57,9 @@ Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function
 		Route::get('usuario/busqueda', 'usuarios\usuarioController@busqueda');
 	/*Rutas de formularios para SANGRE*/
 		Route::resource('sangre', 'sangre\sangreController');
+		Route::get('sangre/create/minimo', 'sangre\sangreController@valida');
+		Route::post('sangre/create/minimo', 'sangre\sangreController@validaMin');
+	/*Rutas de formularios para Unidad */
 		Route::resource('unidad', 'sangre\unidadController');
 	/*Rutas de formularios para transacciones*/
 		Route::resource('transaccion', 'transaccion\transaccionController');

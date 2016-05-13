@@ -80,6 +80,9 @@
 				</a>
 				<a href="{{ url($mid.'/sangre') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-exchange fa-2x" aria-hidden="true"></i>
 					Sangre por Congeladores
+				</a>
+				<a href="{{ url($mid.'/unidad') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-tint fa-2x" aria-hidden="true"></i>
+					Unidades
 				</a>			
       </p></div>
     </li>
