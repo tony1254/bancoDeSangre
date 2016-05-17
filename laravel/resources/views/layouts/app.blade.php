@@ -249,6 +249,14 @@ ul.tabs li a
                     Personas
                   </div>
                 </a>
+              <a class="nounderline " href="{{ url('/'.mid().'/reportes') }}" >
+                  <div class="col-xs-2 ">
+                     <span class="fa fa-flag  " aria-hidden="true"></span>
+                </div>
+                  <div class="col-xs-10 " >
+                    Reportes
+                  </div>
+                </a>
               </li>
   
  
@@ -273,7 +281,7 @@ ul.tabs li a
     
             <script src="\bower_components/jquery/dist/jquery.PrintArea.js"></script>
             <script src="\bower_components/jquery/dist/progresbar.js"></script>
-
+            <script src="\bower_components/Chart.js/dist/Chart.min.js"></script>
 
 <div>
  @if (isset($msj))

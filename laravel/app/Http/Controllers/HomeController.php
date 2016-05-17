@@ -30,4 +30,12 @@ class HomeController extends Controller
     {
         return view('reportes');
     }
+    public function gUnidades()
+    {
+        return view('rptPersona.gUnidades');
+    }
+    public function gDonantes()
+    {
+        return view('rptPersona.gDonantes');
+    }
 }

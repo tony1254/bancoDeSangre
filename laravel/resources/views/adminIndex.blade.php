@@ -73,6 +73,16 @@
       </p></div>
     </li>
     <li>
+      <div class="collapsible-header"><i class="material-icons">data_usage</i>Reportes</div>
+      <div class="collapsible-body"><p>
+	<a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/reportes') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Menu</a>
+	<a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/rptPersona') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Reporte de Donantes</a>
+  <a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/gDonantes') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Grafica de Donantes</a>
+  <a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/gUnidades') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Grafica de Unidades de Sangre</a>
+
+      </p></div>
+    </li>
+    <li>
       <div class="collapsible-header"><i class="material-icons">whatshot</i>Transacciones</div>
       <div class="collapsible-body"><p>
 				<a href="{{ url($mid.'/transaccion/') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-exchange fa-2x" aria-hidden="true"></i>
