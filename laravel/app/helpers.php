@@ -196,3 +196,173 @@ if (empty($grupo)||empty($factor)) {
     return  array('nombre' => $grupo->nombre.$factor->nombre,
                  'color' => $color);
 }
+function filtroPersona($sexo,$grupoSangre,$factorSangre,$minima,$maxima,$paginas)
+    {
+$personas='';
+//QUINTENTO
+
+//Cuartetos
+if (!empty($factorSangre)&&!empty($grupoSangre)&&!empty($minima)&&!empty($sexo)) {
+$personas=Persona::where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                    ->where('grupoSangre',$grupoSangre)
+                    ->where('factorSangre',$factorSangre)
+                    ->paginate($paginas);
+}elseif (!empty($factorSangre)&&!empty($grupoSangre)&&!empty($maxima)&&!empty($sexo)) {
+$personas=Persona::where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                    ->where('grupoSangre',$grupoSangre)
+                    ->where('factorSangre',$factorSangre)
+                    ->paginate($paginas);
+}elseif (!empty($factorSangre)&&!empty($grupoSangre)&&!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->where('grupoSangre',$grupoSangre)
+                    ->where('factorSangre',$factorSangre)
+                    ->paginate($paginas);
+}elseif (!empty($sexo)&&!empty($grupoSangre)&&!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->where('grupoSangre',$grupoSangre)
+                    ->where('sexo',$sexo)
+                    ->paginate($paginas);
+}elseif (!empty($sexo)&&!empty($factorSangre)&&!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->where('factorSangre',$factorSangre)
+                    ->where('sexo',$sexo)
+                    ->paginate($paginas);
+}
+//TRIOS
+elseif (!empty($sexo)&&!empty($grupoSangre)&&!empty($factorSangre)) {
+    $personas=Persona::where('sexo',$sexo)
+                  ->where('grupoSangre',$grupoSangre  )
+                  ->where('factorSangre',$factorSangre  )
+                  ->paginate($paginas);
+}elseif (!empty($minima)&&!empty($grupoSangre)&&!empty($sexo)) {
+    $personas=Persona::where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                  ->where('grupoSangre',$grupoSangre  )
+                  ->where('sexo',$sexo  )
+                  ->paginate($paginas);
+}elseif (!empty($minima)&&!empty($sexo)&&!empty($factorSangre)) {
+    $personas=Persona::where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                  ->where('sexo',$sexo  )
+                  ->where('factorSangre',$factorSangre  )
+                  ->paginate($paginas);
+}elseif (!empty($minima)&&!empty($grupoSangre)&&!empty($factorSangre)) {
+    $personas=Persona::where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                  ->where('grupoSangre',$grupoSangre  )
+                  ->where('factorSangre',$factorSangre  )
+                  ->paginate($paginas);
+}elseif (!empty($maxima)&&!empty($grupoSangre)&&!empty($sexo)) {
+    $personas=Persona::where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                  ->where('grupoSangre',$grupoSangre  )
+                  ->where('sexo',$sexo  )
+                  ->paginate($paginas);
+}elseif (!empty($maxima)&&!empty($sexo)&&!empty($factorSangre)) {
+    $personas=Persona::where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                  ->where('sexo',$sexo  )
+                  ->where('factorSangre',$factorSangre  )
+                  ->paginate($paginas);
+}elseif (!empty($maxima)&&!empty($grupoSangre)&&!empty($factorSangre)) {
+    $personas=Persona::where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                  ->where('grupoSangre',$grupoSangre  )
+                  ->where('factorSangre',$factorSangre  )
+                  ->paginate($paginas);
+}elseif (!empty($sexo)&&!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->where('sexo',$sexo)
+                    ->paginate($paginas);
+}elseif (!empty($grupoSangre)&&!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->where('grupoSangre',$grupoSangre)
+                    ->paginate($paginas);
+}elseif (!empty($factorSangre)&&!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->where('factorSangre',$factorSangre)
+                    ->paginate($paginas);
+}
+//PAREJAS
+elseif (!empty($sexo)&&!empty($grupoSangre)) {
+$personas=Persona::where('sexo',$sexo)
+                    ->where('grupoSangre',$grupoSangre  )
+                    ->paginate($paginas);
+}elseif (!empty($sexo)&&!empty($factorSangre)) {
+$personas=Persona::where('sexo',$sexo)
+                    ->where('factorSangre',$factorSangre  )
+                    ->paginate($paginas);
+}elseif (!empty($grupoSangre)&&!empty($factorSangre)) {
+$personas=Persona::where('grupoSangre',$grupoSangre  )
+                    ->where('factorSangre',$factorSangre  )
+                    ->paginate($paginas);
+}elseif (!empty($sexo)&&!empty($minima)) {
+$personas=Persona::where('sexo',$sexo)
+                    ->where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                    ->paginate($paginas);
+}elseif (!empty($sexo)&&!empty($maxima)) {
+$personas=Persona::where('sexo',$sexo)
+                    ->where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                    ->paginate($paginas);
+}elseif (!empty($factorSangre)&&!empty($minima)) {
+$personas=Persona::where('factorSangre',$factorSangre)
+                    ->where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                    ->paginate($paginas);
+}elseif (!empty($factorSangre)&&!empty($maxima)) {
+$personas=Persona::where('factorSangre',$factorSangre)
+                    ->where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                    ->paginate($paginas);
+}elseif (!empty($grupoSangre)&&!empty($minima)) {
+$personas=Persona::where('grupoSangre',$grupoSangre)
+                    ->where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                    ->paginate($paginas);
+}elseif (!empty($grupoSangre)&&!empty($maxima)) {
+$personas=Persona::where('grupoSangre',$grupoSangre)
+                    ->where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                    ->paginate($paginas);
+}elseif (!empty($minima)&&!empty($maxima)) {
+$personas=Persona::whereBetween('fechaNacimiento', array(
+                                 date('Y', time()-86400*360*$maxima).'-01-01',
+                                  date('Y', time()-86400*360*$minima).'-12-31'
+                                  ))
+                    ->paginate($paginas);
+}
+//individuales
+elseif (!empty($sexo)) {
+  
+ $personas=Persona::where('sexo',$sexo)
+                    ->paginate($paginas);
+}elseif (!empty($grupoSangre)) {
+ $personas=Persona::where('grupoSangre',$grupoSangre)
+                    ->paginate($paginas);
+}elseif (!empty($factorSangre)) {
+
+ $personas=Persona::where('factorSangre',$factorSangre)
+                    ->paginate($paginas);
+}elseif (!empty($minima)) {
+ $personas=Persona::where('fechaNacimiento','<',date('Y', time()-86400*360*$minima).'-12-31')
+                    ->paginate($paginas);
+}elseif (!empty($maxima)) {
+  
+ $personas=Persona::where('fechaNacimiento','>',date('Y', time()-86400*360*$maxima).'-01-01')
+                     ->paginate($paginas);
+}elseif (!empty($busqueda)) {
+      $personas=Persona::where('cui','like','%'.$busqueda.'%'  )
+                    ->orWhere('nombre','like','%'.$busqueda.'%'  )
+                    ->orWhere('apellido','like','%'.$busqueda.'%'  )
+                    ->paginate($paginas);
+}
+return $personas;
+    }

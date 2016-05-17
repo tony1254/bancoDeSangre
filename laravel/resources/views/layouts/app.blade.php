@@ -272,6 +272,7 @@ ul.tabs li a
             <script src="\bower_components/print.js"></script>
     
             <script src="\bower_components/jquery/dist/jquery.PrintArea.js"></script>
+            <script src="\bower_components/jquery/dist/progresbar.js"></script>
 
 
 <div>

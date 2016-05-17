@@ -34,6 +34,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function(){
 	Route::get('/reportes', 'HomeController@reportes');
+	Route::resource('rptPersona', 'rptPersona\rptPersonaController');
+
 	/*Rutas de formularios para Sesion de Usuario*/
 	Route::get('/', 'usuarios\usuariosController@index');	
 	Route::resource('usuarios', 'usuarios\usuariosController');

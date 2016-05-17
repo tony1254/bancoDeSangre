@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\personas;
+namespace App\Http\Controllers\rptPersona;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class personaController extends Controller
+class rptPersonaController extends Controller
 {
        /**
      * Where to redirect users after login / registration.
@@ -49,13 +49,12 @@ public function index(Request $request)
    {
     
 $mid=mid();
-// return $request->all();
-// return var_dump( empty($request->all()));
+
 if (empty($request->all())) {
-     $personas=Persona::paginate(10);
-        return view('persona/index', ['personas' => $personas,'mid'=>$mid]);
+     $rptPersonas=Persona::paginate(10);
+        return view('rptPersona/index', ['personas' => $rptPersonas,'mid'=>$mid]);
 }else{
-   /**
+     /**
    *busqueda
    */
    $paginas=10;
@@ -67,7 +66,6 @@ if (empty($request->all())) {
   $busqueda=$request->input('search');
   $busqueda=str_replace ( '-', '' , $busqueda);
   // return var_dump(empty($busqueda));
-
      $personas=filtroPersona($sexo,$grupoSangre,$factorSangre,$minima,$maxima,$paginas);
     if (empty($personas)) {
       $personas=Persona::where('cui','like','%'.$busqueda.'%'  )
@@ -76,11 +74,7 @@ if (empty($request->all())) {
                     ->paginate($paginas);
     }
 
-
-
-
-
-        return view('persona/index',  ['personas' => $personas,'mid'=>$mid,'busqueda'=>$busqueda,'wsexo'=>$sexo,'wfactorSangre'=>$factorSangre,'wgrupoSangre'=>$grupoSangre,'wminima'=>$minima,'wmaxima'=>$maxima]);
+        return view('rptPersona/index', ['personas' => $personas,'mid'=>$mid,'busqueda'=>$busqueda,'wsexo'=>$sexo,'wfactorSangre'=>$factorSangre,'wgrupoSangre'=>$grupoSangre,'wminima'=>$minima,'wmaxima'=>$maxima]);
 
 }
 

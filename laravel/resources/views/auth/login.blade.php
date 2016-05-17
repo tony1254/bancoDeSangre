@@ -63,7 +63,7 @@
 
                         <div class="form-group">
                             <div class="col-md-7 col-md-offset-2">
-                                <button type="submit" class="btn btn-primary white-text blue darken-4">
+                                <button type="submit" class="btn btn-primary white-text blue darken-4 waves-effect waves-light ">
                                     <i class="fa fa-btn fa-sign-in"></i>Iniciar Sesion
                                 </button>
   <a class="waves-effect  btn-flat waves-red blue-text text-darken-4" href="{{ url('/password/reset') }}">Olvidaste tu Contraseña?</a>

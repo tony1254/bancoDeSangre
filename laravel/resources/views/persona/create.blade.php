@@ -72,7 +72,7 @@
                                 <label class="active"  for="nombree">Vecindad</label>
                             </div>        
                             <div class="input-field col s6">
-                                <input placeholder="Ingrese Nombre de fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" type="date" class="validate fechaNacimiento datepicker" value="" required
+                                <input placeholder="Ingrese Nombre de fechaNacimiento" id="fechaNacimiento" name="fechaNacimiento" type="date" class="validate fechaNacimiento " value="" required
                             title="Ingrese un fechaNacimiento valido">
                                 
                                 <label class="active"  for="emaile">Fecha de Nacimiento</label>
