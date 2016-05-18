@@ -84,11 +84,13 @@
                         </div>                        
 <div class="row">
   
-  <div class="form-group label-floating col-sm-4 ">
+            <input type="text" name="contenido" id="contenido"  class="form-control" maxlength="3" value="500" hidden="true">
+  <div class="form-group label-floating col-sm-2 ">
     <div class="input-group text-right">
       <label class="control-label " for="contenido">Contenido de Unidad</label>
-      <input type="text" name="contenido" id="contenido"  class="form-control" maxlength="3">
-      
+<font color="" size="4.5">
+500        
+</font>
       <span class="input-group-addon">ml</span>
       
     </div>

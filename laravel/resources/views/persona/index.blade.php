@@ -95,13 +95,24 @@ function limpiar(){
     
     <!-- {!!var_dump($tipoSangre=tipoSangre($persona->grupoSangre,$persona->factorSangre))!!} -->
 
-      <i class="circle
+      
+       
+       <a href="{{ url($mid.'/persona/'.$persona->id.'') }}" 
+                class=" usub  circle white-text waves-effect waves-light
 @if ($persona->estado==1)
     {{$tipoSangre['color']}}
   @else
     black
 @endif
-       ">{{$tipoSangre['nombre']}}</i>
+                 ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <font size="4.5">
+            {{$tipoSangre['nombre']}}
+            </font>
+          </div>
+        </div>        
+        </a>
       <span class="title">{{$persona->nombre.' '.$persona->apellido}}</span>
       <p>{{substr($persona->cui , 0, 4)}}-{{substr($persona->cui , 4, 5)}}-{{substr($persona->cui , 9, 4)}}
       	<br>

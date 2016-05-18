@@ -84,8 +84,7 @@ public function show($id,Request $request)
    */
 public function edit($id)
    {
-
-        return view('usuario/edit', ['mid'=>mid(),'roles'=>CRol::all(),'usuario'=>User::find($id)]);
+        return view('unidad/edit', ['mid'=>mid(),'almacenes'=>CAlmacen::all(),'congeladores'=>CCongelador::all(),'unidad'=>TUnidad::find($id)]);
          
    }
    /**
@@ -133,32 +132,13 @@ public function store(Request $request)
    */   
 public function update($id,Request $request)
    {
-         $usuario= User::find($id);
-          $usuario->name=$request->input('nombre');
-        $usuario->cui=str_replace('-', '', $request->get('cui'));
-        $usuario->rol=$request->input('rol');
-         $v = \Validator::make($request->all(), [
-            
-              'email' => 'required|email|max:255|unique:users',
-            'contrasena' => 'min:6'
-            ],[
-    'unique' => 'Usuario ya existente',
-    'min' => 'Contraseña no cumple con el tamaño minimo',
-    'required' => 'Falto llenar campos',
-]);
-             if($usuario->email!=$request->input('email')){
-
-            if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }   
-             }
-        $usuario->email=$request->input('email');
-        if (!empty($request->get('contrasena'))) {
-            $usuario->password=bcrypt($request->get('contrasena'));
-        }
-        $usuario->save();  
-        return redirect()->to('admin/usuario?search='.$usuario->cui);
+         $unidad= TUnidad::find($id);
+          $unidad->idAlmacen=$request->input('almacen');
+          $unidad->idCongelador=$request->input('congelador');
+          $unidad->idEstadoUnidad=$request->input('estado');
+          $unidad->contenido=$request->input('contenido');
+          $unidad->save();
+        return redirect()->to('admin/unidad?search='.$unidad->cui);
 
         return "update";    
    }

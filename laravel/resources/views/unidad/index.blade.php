@@ -24,17 +24,34 @@
 <ul class="collection">
  @foreach ($unidades as $unidad)
     <!-- {!!var_dump($tipoSangre=tipoSangre($unidad->idGrupoSangre,
-                                            $unidad->idFactorSangre))!!} -->
-    <li class="collection-item avatar">
-        <i class=" circle 
-        @if ($unidad->idEstadoUnidad==1)
-            {{$tipoSangre['color']}}
-          @else
-            black
-        @endif
-        ">{{$tipoSangre['nombre']}}</i>
+                                            $unidad->idFactorSangre))!!} 
 
-        
+{{
+  // if ($unidad->caduca<date('Y-m-d', time())) {
+  //             $unidad->idEstadoUnidad=4;
+  //             $unidad->save();
+            // }
+            $a=1
+}}
+                                            -->
+    <li class="collection-item avatar">
+        <a href="{{ url($mid.'/unidad/'.$unidad->id.'') }}" 
+                class=" usub  circle white-text waves-effect waves-light
+          @if ($unidad->idEstadoUnidad==1)
+              {{$tipoSangre['color']}}
+            @else
+              black
+          @endif
+                 ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <font size="4.5">
+            {{$tipoSangre['nombre']}}
+            </font>
+          </div>
+        </div>        
+        </a>
+
         <span class="title">  Unidad #: {{$unidad->id}} </span>
         <p>         
           Vence:  {{substr($unidad->caduca,8,2)}}-{{substr($unidad->caduca,5,2)}}-{{substr($unidad->caduca,0,4)}}<br>

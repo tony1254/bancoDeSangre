@@ -17,6 +17,7 @@ use App\TSangre;
 use App\TUnidad;
 use App\CAlmacen;
 use App\CCongelador;
+use App\CHemoderivado;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -84,12 +85,23 @@ public function show($id,Request $request)
 /**
    *FUncion para Validacion
    */
-public function valida()
+public function valida(Request $request)
    {
+    if ($request->exists('msj')) {
+        return view('transaccion/valida', ['mid'=>mid(),'msj'=>$request->input('msj')]);
+      
+    }
         return view('transaccion/valida', ['mid'=>mid()]);
         return "show";    
    }
-
+public function validaRetiro(Request $request)
+   {
+    if ($request->exists('msj')) {
+        return view('transaccion/validaRetiro', ['mid'=>mid(),'msj'=>$request->input('msj')]);
+      
+    }
+        return view('transaccion/validaRetiro', ['mid'=>mid()]);
+   }
    /**
    *FUncion para editar
    */
@@ -113,6 +125,24 @@ public function create(Request $request)
           'persona'=> $persona,
           'almacenes'=>CAlmacen::all(),
           'congeladores'=>CCongelador::all(),
+          ]);
+
+   }   
+   /**
+   *FUncion para Crear RETIRO
+   */
+public function createRetiro(Request $request)
+   {
+    $persona= Persona::where('cui',str_replace('-', '', $request->get('cui')))->first();
+        
+      if (count($persona)==0) {
+        return view('transaccion/valida', ['msj'=>'Persona no encontrada','mid'=>mid()]);
+      }
+        return view('transaccion/createRetiro', ['mid'=>mid(),
+          'persona'=> $persona,
+          'almacenes'=>CAlmacen::all(),
+          'congeladores'=>CCongelador::all(),
+          'hemoderivados'=>CHemoderivado::all()
           ]);
 
    }
@@ -170,7 +200,182 @@ public function store(Request $request)
           $sangre->cuarentena=$sangre->cuarentena+1;
         }
         $sangre->save();
-        return redirect()->to(mid().'/transaccion?search='.$detalle->idTransaccion.'&msj=Nueva Donacion Graba Exitosamente');
+        return redirect()->to(mid().'/transaccion?search='.$detalle->idTransaccion.'&msj=Nueva Donacion Grabada Exitosamente');
+
+        
+        return "store";    
+   }
+public function storeRetiro(Request $request)
+   {
+        $persona=persona::find($request->input('persona'));
+      if (count($persona)==0) {
+        return view('transaccion/valida', ['msj'=>'Persona no encontrada','mid'=>mid()]);
+      }
+$sangre="nada";
+$grupo = array("1", "1", "2", "2", "3", "3", "4", "4");
+    if ($request->exists('factor')) {
+      $grupo=$grupo[$request->input('factor')-1];
+      if ($request->input('factor')%2==0){
+          $factor=2;
+      }else{
+          $factor=1;
+      }
+      $cantidad=max($request->input('cantidadO'),$request->input('cantidadA'), $request->input('cantidadB'),$request->input('cantidadAB'));
+
+        $sangre=TSangre::where('idGrupoSangre',$grupo)
+                        ->where('idFactorSangre',$factor)
+                        ->where('idAlmacen',$request->input('almacen'))
+                        ->first();
+      if (count($sangre)==0) {
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Hay ese Unidades en La ubicacion Solicitada');
+                              }                        
+
+                              
+      if ($request->input('hemoderivado')==1) {
+        if ($sangre->sangreTotal<$cantidad) {
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Hay ese Unidades Suficiente en La ubicacion Solicitada');
+        }
+      }elseif ($request->input('hemoderivado')==2) {
+        if ($sangre->hematies<$cantidad) {
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Hay ese Unidades Suficiente en La ubicacion Solicitada');
+        }
+      }elseif ($request->input('hemoderivado')==3) {
+        if ($sangre->plaquetas<$cantidad) {
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Hay ese Unidades Suficiente en La ubicacion Solicitada');
+        }
+      }elseif ($request->input('hemoderivado')==4) {
+        if ($sangre->plasma<$cantidad) {
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Hay ese Unidades Suficiente en La ubicacion Solicitada');
+        }
+      }
+
+ /*Creando Transaccion*/
+        $transaccion=new TTransaccion;
+        $transaccion->idCliente=$persona->id;
+        $transaccion->idUsuario=Auth::user()->id;
+        $transaccion->idAlmacen=$request->input('almacen');
+        $transaccion->idTipoTransaccion=2;//Retiro
+        $transaccion->save();
+          for ($i=0; $i < $cantidad; $i++) { 
+            $unidad=TUnidad::where('idEstadoUnidad',1)
+                            ->where('idHemoderivado',$request->input('hemoderivado'))
+                            ->where('idAlmacen',$request->input('almacen'))
+                            ->where('idCongelador',$request->input('congelador'))
+                            ->where('idGrupoSangre',$grupo)
+                            ->where('idFactorSangre',$factor)
+                            ->first();
+            if ($unidad->caduca<date('Y-m-d', time())) {
+              $unidad->idEstadoUnidad=4;
+              $unidad->save();
+              $sangre->cuarentena=$sangre->cuarentena+1;
+            }else{
+              $unidad->idEstadoUnidad=3;
+              $unidad->save();
+            }
+            //Descuenta La sangre Usada
+            if ($request->input('hemoderivado')==1) {
+              $sangre->sangreTotal=$sangre->sangreTotal-1;
+            }elseif ($request->input('hemoderivado')==2) {
+              $sangre->hematies=$sangre->sangreTotal-1;
+            }elseif ($request->input('hemoderivado')==3) {
+              $sangre->plaquetas=$sangre->sangreTotal-1;
+            }elseif ($request->input('hemoderivado')==4) {
+              $sangre->plasma=$sangre->sangreTotal-1;
+            }
+            $sangre->save();
+            /*Creando Detalle Transaccion*/
+            $detalle=new TDetalleTransaccion;
+            $detalle->idTransaccion=$transaccion->id;
+            $detalle->idUnidad=$unidad->id;
+            $detalle->save();
+
+          }
+
+
+
+}else{
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Selecciono un Tipo de Sangre');
+}
+/*
+
+          for ($i=0; $i < $cantidad; $i++) { 
+            $unidad=TUnidad::where('idEstadoUnidad',1)
+                            ->where('idHemoderivado',$request->input('hemoderivado'))
+                            ->where('idAlmacen',$request->input('almacen'))
+                            ->where('idCongelador',$request->input('congelador'))
+                            ->where('idGrupoSangre',$grupo)
+                            ->where('idFactorSangre',$factor)
+                            ->first();
+            if ($unidad->caduca<date('Y-m-d', time())) {
+              $unidad->idEstadoUnidad=4;
+              $unidad->save();
+              $i--;
+            }else{
+              $unidad->idEstadoUnidad=3;
+              $unidad->save();
+            }
+
+
+            return $unidad;
+          }
+
+          /*en caso de error
+          $error=$error." SangreTotal: O+";
+          return redirect()->to(mid().'/transaccion/create/valida/retiro?msj=No Hay Sangre Suficiente de '.$error);
+          return $request->all();
+          return $sangre;
+          return 1;
+        }
+      return $sangre->sangreTotal.$request->input('cantidadO');
+    return $sangre;
+    }  
+
+    if ($request->input('')) {
+      
+    }
+      if ($sangre->Sangretotal>=$request->input('cantidadO')) {
+
+        
+      }
+        /*Creando Unidad de Sangre
+        //si esta factor1 && cantidadA>1
+        //si congelador es Sangre Total
+          // $sangre->Sangretotal;
+        $unidad=TUnidad::where('idEstadoUnidado',1)->where('idGrupoSangre',1)->first();
+        $unidad->idSangre=$sangre->id;
+        $unidad->idHemoderivado=1;//Sangre Total
+        $unidad->idAlmacen=$request->input('almacen');
+        $unidad->idCongelador=$request->input('congelador');
+        $unidad->idGrupoSangre=$persona->grupoSangre;
+        $unidad->idFactorSangre=$persona->factorSangre;
+        $unidad->caduca= date('Y-m-d', time()+86400*25 );//Sangre total caduca en un mes
+        $unidad->contenido=$request->input('contenido');
+        if ($persona->estado==1) {
+          $unidad->idEstadoUnidad=1;//estado Activo
+        }else{
+          $unidad->idEstadoUnidad=2;//estado Inactivo
+        }
+        $unidad->save();
+        /*Creando Transaccion
+        $transaccion=new TTransaccion;
+        $transaccion->idCliente=$persona->id;
+        $transaccion->idUsuario=Auth::user()->id;
+        $transaccion->idAlmacen=$request->input('almacen');
+        $transaccion->idTipoTransaccion=1;//Donacion
+        $transaccion->save();
+        /*Creando Detalle Transaccion
+        $detalle=new TDetalleTransaccion;
+        $detalle->idTransaccion=$transaccion->id;
+        $detalle->idUnidad=$unidad->id;
+        $detalle->save();
+        /*Incrementa en Sangre
+        if ($persona->estado==1) {
+          $sangre->sangreTotal=$sangre->sangreTotal+1;
+        }else{
+          $sangre->cuarentena=$sangre->cuarentena+1;
+        }
+        $sangre->save();*/
+        return redirect()->to(mid().'/transaccion?search='.$detalle->idTransaccion.'&msj=Nueva Retiro Grabada Exitosamente');
 
         
         return "store";    

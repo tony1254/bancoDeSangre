@@ -52,6 +52,8 @@ ul.ico li a
 {text-decoration:none;   } 
 ul.tabs li a
 {text-decoration:none;   } 
+a.usub
+{text-decoration:none;   } 
 </style>
 <link rel="icon" type="image/png" href="\bower_components/contenido/icono-o-1.png" />
 

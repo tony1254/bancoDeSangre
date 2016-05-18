@@ -28,8 +28,18 @@
     
     <li class="collection-item avatar">
     
-
-      <i class="circle blue accent-{{4-$usuario->rol}}">{{substr(App\CRol::find($usuario->rol)->nombre,0,1)}}</i>
+     <a href="{{ url($mid.'/usuario/'.$usuario->id.'') }}" 
+                class=" usub  circle white-text waves-effect waves-light
+                  blue accent-{{4-$usuario->rol}}
+                 ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <font size="4.5">
+              {{substr(App\CRol::find($usuario->rol)->nombre,0,1)}}
+            </font>
+          </div>
+        </div>        
+        </a>
       <span class="title">{{$usuario->name}}</span>
       <p>{{substr($usuario->cui , 0, 4)}}-{{substr($usuario->cui , 4, 5)}}-{{substr($usuario->cui , 9, 4)}}
       	<br>

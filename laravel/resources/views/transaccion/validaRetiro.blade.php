@@ -5,10 +5,10 @@
 
 
   
-<form class="form" role="form" method="POST" action="{{ url($mid.'/transaccion/create/valida') }}">
+<form class="form" role="form" method="POST" action="{{ url($mid.'/transaccion/create/valida/retiro') }}">
                  {!! csrf_field() !!}
 <div class="panel panel-default"  id="ver">
-            <div class="panel-heading"> Validacion Nueva Donacion</div>
+            <div class="panel-heading"> Validacion Nuevo Retiro</div>
               <div class="panel-body">
             <div class="input-field col s6">
             <input type="text"  name="cui" id="cui" required >

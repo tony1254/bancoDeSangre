@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="panel panel-default" id="ver2">
-            <div class="panel-heading">Transaccion</div>
+            <div class="panel-heading">Transaccion NO. <b>{{$transaccion->id}}</b></div>
             <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">
@@ -107,14 +107,25 @@
     <!-- {!!var_dump($tipoSangre=tipoSangre($unidad->idGrupoSangre,
                                             $unidad->idFactorSangre))!!} -->
     <li class="collection-item avatar">
-        <i class=" circle 
-        @if ($unidad->idEstadoUnidad==1)
-            {{$tipoSangre['color']}}
-          @else
-            black
-        @endif
-        ">{{$tipoSangre['nombre']}}</i>
-
+        <a href="{{ url($mid.'/unidad/'.$unidad->id.'') }}" 
+                class=" usub  circle white-text waves-effect waves-light
+          @if ($unidad->idEstadoUnidad==1||$unidad->idEstadoUnidad==3)
+              {{$tipoSangre['color']}}
+          @endif              
+          @if ($unidad->idEstadoUnidad==4)
+               lime darken-4
+            @else
+              black
+          @endif
+                 ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <font size="4.5">
+            {{$tipoSangre['nombre']}}
+            </font>
+          </div>
+        </div>        
+        </a>
         
         <span class="title">  Unidad #: {{$detalle->idUnidad}} </span>
         <p>         

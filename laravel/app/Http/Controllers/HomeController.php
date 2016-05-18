@@ -38,4 +38,8 @@ class HomeController extends Controller
     {
         return view('rptPersona.gDonantes');
     }
+    public function gTransacciones()
+    {
+        return view('rptPersona.gTransacciones');
+    }
 }

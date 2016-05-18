@@ -41,23 +41,46 @@
                                             $unidad->idFactorSangre))!!} -->
         
     <li class="collection-item avatar">
-        <i class="material-icons circle 
+        <a href="{{ url($mid.'/transaccion/'.$transaccion->idTransaccion.'') }}" 
         {{$transac=App\TTransaccion::find($transaccion->idTransaccion)}}
 @if ($unidad->idEstadoUnidad==2)
-          black
-        ">remove</i>
+          class=" usub  circle white-text waves-effect waves-light black ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <i class="material-icons" >remove</i>
+          </div>
+        </div>        
+        </a>
 @else
         @if ($transac->idTipoTransaccion==1)
-          green
-        ">call_received</i>
+          class=" usub  circle white-text waves-effect waves-light green
+        ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <i class="material-icons" >call_received</i>
+          </div>
+        </div>
+        </a>
         @endif
         @if ($transac->idTipoTransaccion==2)
-          red
-        ">call_made</i>
+          class=" usub  circle white-text waves-effect waves-light red
+        ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <i class="material-icons" >call_made</i>
+          </div>
+        </div>
+        </a>
         @endif
         @if ($transac->idTipoTransaccion==3)
-          blue
-        ">call_split</i>
+          class=" usub  circle white-text waves-effect waves-light blue
+        ">
+        <div class="row text-center" >
+          <div style="line-height:40px" >
+            <i class="material-icons" >call_split</i>
+          </div>
+        </div>
+        </a>
         @endif
 
 @endif        
@@ -113,14 +136,30 @@
     </ul>  
   </div> -->
 </div>
-  
+    <div class="fixed-action-btn vertical click-to-toggle" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="material-icons" style="vertical-align: top">menu</i>
+    </a>
+    <ul>
+      <li>
+        <a class="btn-floating  green tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nueva Donacion" type="submit" href="{{ url($mid.'/transaccion/create/valida') }}">
+        <i class="material-icons"  style="vertical-align: top">add</i>
+        </a>
+      </li>
+      <li>
+      <a class="btn-floating  red tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo Retiro" type="submit" href="{{ url($mid.'/transaccion/create/valida/retiro') }}">
+        <i class="material-icons"  style="vertical-align: top">remove</i>
+        </a>
+      </li>
+    </ul>
+  </div>
           
-  <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
+  <!-- <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
       <a class="btn-floating btn-large green tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo" type="submit" href="{{ url($mid.'/transaccion/create/valida') }}">
         <i class="material-icons"  style="vertical-align: top">add</i>
       </a>
       
-    </div>
+    </div> -->
 
   
 </form>

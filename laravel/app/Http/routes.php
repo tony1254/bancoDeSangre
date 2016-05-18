@@ -36,6 +36,7 @@ Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function
 	Route::get('/reportes', 'HomeController@reportes');
 	Route::get('/gUnidades', 'HomeController@gUnidades');
 	Route::get('/gDonantes', 'HomeController@gDonantes');
+	Route::get('/gTransacciones', 'HomeController@gTransacciones');
 	Route::resource('rptPersona', 'rptPersona\rptPersonaController');
 
 	/*Rutas de formularios para Sesion de Usuario*/
@@ -69,6 +70,9 @@ Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function
 		Route::resource('transaccion', 'transaccion\transaccionController');
 		Route::get('transaccion/create/valida', 'transaccion\transaccionController@valida');
 		Route::post('transaccion/create/valida', 'transaccion\transaccionController@create');
+		Route::get('transaccion/create/valida/retiro', 'transaccion\transaccionController@validaRetiro');
+		Route::post('transaccion/create/valida/retiro', 'transaccion\transaccionController@createRetiro');
+		Route::post('transaccion/create/storeRetiro', 'transaccion\transaccionController@storeRetiro');
 		
 
 	//Route::resource('persona', 'PersonaController');

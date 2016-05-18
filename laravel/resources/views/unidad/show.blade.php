@@ -12,6 +12,8 @@
         
             <b>Unidad #:</b> {{$unidad->id}}
           <br>
+          <b>Contenido :</b> {{$unidad->contenido}}ml
+          <br>
             <b>Tipo de Sangre:</b> {{$tipoSangre['nombre']}}
           <br>
             <b>Hemoderivado:</b> {{App\CHemoderivado::find($unidad->idHemoderivado)->nombre}}
