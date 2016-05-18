@@ -76,8 +76,8 @@ public function update(Request $request, $id)
         $var=$request->get('contrasena');
         $usuario=User::find($id);
         $usuario->name=$request->get('nombre');
-        $usuario->rol=$request->get('rol');
-        $usuario->cui=str_replace('-', '', $request->get('cui'));
+        // $usuario->rol=$request->get('rol');
+        // $usuario->cui=str_replace('-', '', $request->get('cui'));
              $v = \Validator::make($request->all(), [
             
               'email' => 'required|email|max:255|unique:users',

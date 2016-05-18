@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Catalogo de usuarios'}}@stop
+@section('title') {{'Catalogo de Almacenes'}}@stop
 
 @section('content')
 

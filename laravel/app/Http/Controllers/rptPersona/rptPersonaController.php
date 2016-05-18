@@ -47,15 +47,15 @@ class rptPersonaController extends Controller
     }
     public function gUnidades()
     {
-        return view('rptPersona/gUnidades');
+        return view('rptPersona/gunidades');
     }
     public function gDonantes()
     {
-        return view('rptPersona/gDonantes');
+        return view('rptPersona/gdonantes');
     }
     public function gTransacciones()
     {
-        return view('rptPersona/gTransacciones');
+        return view('rptPersona/gtransacciones');
     }
    /**
    *index

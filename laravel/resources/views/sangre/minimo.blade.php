@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Transaccion valida'}}@stop
+@section('title') {{'Edicion de minimo en Almacen'}}@stop
 
 @section('content')
 

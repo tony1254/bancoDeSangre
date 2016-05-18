@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Catalogo de usuarios'}}@stop
+@section('title') {{'Edicion de usuario #'.$usuario->id}}@stop
 
 @section('content')
 @if ($errors->has())

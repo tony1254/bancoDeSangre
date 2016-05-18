@@ -133,15 +133,23 @@ a.usub
 
                         <ul id="link" class="dropdown-content">
                                 <li class="divider"></li>
+                              @if (Auth::user()->rol<=2)
                                 <li>
                                      <a href="{{ url(mid().'/transaccion') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-exchange "></i>&nbsp;&nbsp;Transacciones</a>
                                 </li>
+                              @endif
+                              @if (Auth::user()->rol==1)
+                            
                                 <li>
                                      <a href="{{ url('/admin/usuario') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-users "></i>&nbsp;&nbsp;Usuarios</a>
                                 </li>
+                              @endif
+                              @if (Auth::user()->rol<=2)
+                            
                                 <li>
                                      <a href="{{ url('/'.mid().'/persona') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-universal-access "></i>&nbsp;&nbsp;Personas</a>
                                 </li>
+                              @endif
                                 <li>
                                      <a href="{{ url('/'.mid().'/reportes') }}" class=" nounderline black-text waves-effect waves-light "><i class="fa  fa-flag"></i>&nbsp;&nbsp;Reportes</a>
                                 </li>
@@ -226,6 +234,7 @@ a.usub
         
               <!-- Dropdown Trigger -->
               <li>
+            @if (Auth::user()->rol<=2)
                 <a class=" nounderline " href="{{ url(mid().'/transaccion') }}" >
                   <div class="col-xs-2 " >
                      <span class="fa fa-retweet  "aria-hidden="true" ></span>
@@ -235,6 +244,8 @@ a.usub
                   </div>
 
                 </a>
+            @endif
+            @if (Auth::user()->rol==1)                
                   <a class="nounderline " href="{{ url('/admin/usuario') }}" >
                   <div class="col-xs-2 ">
                      <span class="fa fa-user  " aria-hidden="true"></span>
@@ -243,6 +254,8 @@ a.usub
                     Usuarios
                   </div>
                 </a>
+            @endif
+            @if (Auth::user()->rol<=2)
                 <a class="nounderline " href="{{ url('/'.mid().'/persona') }}" >
                   <div class="col-xs-2 ">
                      <span class="fa fa-universal-access  " aria-hidden="true"></span>
@@ -251,6 +264,7 @@ a.usub
                     Personas
                   </div>
                 </a>
+            @endif
               <a class="nounderline " href="{{ url('/'.mid().'/reportes') }}" >
                   <div class="col-xs-2 ">
                      <span class="fa fa-flag  " aria-hidden="true"></span>

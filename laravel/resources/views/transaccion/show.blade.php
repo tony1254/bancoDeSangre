@@ -1,10 +1,10 @@
 @extends('layouts.app')
-@section('title') {{'Catalogo de Personas'}}@stop
+@section('title') {{'Transaccion #'.$transaccion->id}}@stop
 
 @section('content')
 
 <div class="panel panel-default" id="ver2">
-            <div class="panel-heading">Transaccion NO. <b>{{$transaccion->id}}</b></div>
+            <div class="panel-heading">Transaccion #. <b>{{$transaccion->id}}</b></div>
             <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">

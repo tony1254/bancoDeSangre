@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Transaccion'}}@stop
+@section('title') {{'Transacciones'}}@stop
 
 @section('content')
 
@@ -114,27 +114,7 @@
   </ul> 
 </div>
         </div>      
-  <!-- <div id="titulo" class="panel-footer">
-    <ul class="collection">
-      <li class="collection-item avatar">
-        <i class="material-icons circle green">call_received</i>
-        <span class="title">O+</span>
-        <p>
-          Donante: Luis Garcia <br>
-          ID: 1
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-      <li class="collection-item avatar">
-        <i class="material-icons circle red">call_made</i>
-        <span class="title">Title</span>
-        <p>First Line <br>
-           Second Line
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-    </ul>  
-  </div> -->
+  
 </div>
     <div class="fixed-action-btn vertical click-to-toggle" style="bottom: 45px; right: 24px;">
     <a class="btn-floating btn-large red">
@@ -149,6 +129,11 @@
       <li>
       <a class="btn-floating  red tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo Retiro" type="submit" href="{{ url($mid.'/transaccion/create/valida/retiro') }}">
         <i class="material-icons"  style="vertical-align: top">remove</i>
+        </a>
+      </li>
+      <li>
+      <a class="btn-floating  blue tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Catalago de Unidades" type="submit" href="{{ url($mid.'/unidad') }}">
+        <i class="fa fa-tint fa-2x" aria-hidden="true"></i>
         </a>
       </li>
     </ul>

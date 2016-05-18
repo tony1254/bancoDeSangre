@@ -66,7 +66,6 @@ public function update($id,Request $request)
         $persona->vecindad=$request->input('vecindad');
         $persona->telefono1=$request->input('telefono1');
         $persona->telefono2=$request->input('telefono2');
-        $persona->cui=str_replace('-', '', $request->get('cui'));
         $persona->email=$request->input('email');
         $persona->sexo=$request->input('sexo');
         $persona->grupoSangre=$request->input('grupoSangre');

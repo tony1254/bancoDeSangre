@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title') {{'Grafica de Unidades'}}@stop
 
 @section('content')
 <script type="text/javascript">

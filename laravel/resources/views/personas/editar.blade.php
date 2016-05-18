@@ -19,7 +19,7 @@
 				      </div>
 				      <div class="input-field col s6">
 				          <input placeholder="Ingrese CUI" id="cui" name="cui" type="text" class="validate cui" value="{{$persona->cui}}" required
- 							title="Ingrese un CUI valido : 9999-99999-9999">
+ 							title="Ingrese un CUI valido : 9999-99999-9999" disabled="">
 				          
 				          <label class="active"  for="emaile">CUI</label>
 				      </div>
@@ -96,7 +96,7 @@
 				          <label class="active"  for="emaile">telefono 2</label>
 				      </div>
 				      <div class="input-field col s6">
-                                <input placeholder="Ingrese Nombre de peso" id="peso" name="peso" type="text" class="validate peso"  value=""
+                                <input placeholder="Ingrese Nombre de peso" id="peso" name="peso" type="text" class="validate peso"  value="{{$persona->peso}}" required
                             title="Ingrese un peso valido : 999.99">
                                 <label class="active"  for="emaile">Peso Kg</label>
                       </div>	    

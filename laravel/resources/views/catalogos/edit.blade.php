@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Catalogo de '.$catalogo.' Nuevo'}}@stop
+@section('title') {{'Edicion de '.$catalogo.' # '.$datos->id}}@stop
 
 @section('content')
 <form class="form" role="form" method="POST" action="{{ url(mid().'/catalogos/'.$catalogo.'/'.$datos->id.'/update') }}">

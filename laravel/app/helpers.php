@@ -129,7 +129,9 @@ function datoCatalogo($catalogo,$id)
         }
         return $datos;
 }
-/*REFERENCIA SNAGUINEA
+/*http://hemoderivadosmesa8.blogspot.com/
+http://larepublica.pe/14-06-2012/sangre-donada-tiene-fecha-de-vencimiento
+REFERENCIA SNAGUINEA
  Menos comunes: AB+ en un 3%, AB- 1%, el B+ en un 9% B- 2%, A- 6% y el O- 7% de la poblacion 
 
 Mas común: O+ en un 39% y A+ en un 33% 
@@ -142,7 +144,13 @@ Las personas AB puede recibir no solo de AB sino de A,B y O, porque no tiene Ant
 
 En cuanto al factor Rh, los positivos pueden recibir de los negativos pero los negativos solo de los negativos porque estos poseen anticuerpos contra el positivo.
 
+***Sangre donada, ¿tiene fecha de vencimiento?
 
+Los glóbulos rojos, o hematíes pueden conservarse 42 días entre 1 °C y 6 °C. Este elemento transporta oxígeno y se aplica en las cirugías, politraumatismos, dolencias crónicas y enfermos sangrantes.
+
+Las plaquetas sólo tienen un tiempo de vida entre 5 y 7 días bajo una temperatura entre 20 °C y 24 °C. Este componente detiene la hemorragia y se les brinda a los pacientes con caída en el número de estas células y en casos de leucemia o quimioterapia.
+
+Por último, el plasma es la parte líquida de la sangre y se usa en casos de hepatopatía, quemaduras y hemofilia. Se congela a menos de -25 °C y llega a durar hasta dos años.
 */
 /**
 *Productos*

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Catalogo de Personas'}}@stop
+@section('title') {{'Edicion de Persona #'.$persona->id}}@stop
 
 @section('content')
 

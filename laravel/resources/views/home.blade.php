@@ -1,61 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Mi Perfil</div>
-
-                <div class="panel-body">
-                    Inicio de session correcto!
-                    <br>
-                    <br>
-<script type="text/javascript">
-
-    function prueba() {
-    // alert("hola");
-      Materialize.toast('Mira Mi Muchachita Te Amo Muchoo Muuuaaa!!!!!', 3000, 'rounded') // 'rounded' is the class I'm applying to the toast
-
-    $( "#salida" ).load( "\\usuarios" );
+<br>
+<style type="text/css">
+.contornear{
+   text-shadow: -1px 0 #fff, 1px 0 #fff, 0 1px #fff, 0 -1px #fff;
+   color: #b71c1c ;
+}
+  h3.fuego{
+   text-shadow: 0 0 20px #fefcc9, 2px -2px 3px #feec85, -4px -4px 5px #ffae34, 5px -10px 6px #ec760c, -5px -12px 8px #cd4606, 0 -15px 20px #973716, 2px -15px 20px #451b0e;
+   color: #666;
 }
 
-
-</script>
-
-
-                    <a onclick="prueba()" class="btn  waves-effect waves-light  white-text" type="button">
-                        <i class="material-icons left" >cloud</i>
-                        button
-                    </a>
-
-                    <div id="salida"></div>
-
-            <ul id="dropdown2" class="dropdown-content">
-    <li><a class="nounderline  "  href="#!">one<span class="badge transparent">1</span></a></li>
-    <li><a class="nounderline  "  href="#!">two<span class="new badge">1</span></a></li>
-    <li><a class="nounderline  "  href="#!">three</a></li>
-  </ul>
-  <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Dropdown<i class="fa fa-angle-down right" aria-hidden="true"></i>
-</a>
-                    {{var_dump(Auth::user())}}
-                    <br>
-
-
-    <div class="fixed-action-btn vertical click-to-toggle" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-        <i class="fa fa-bars fa-2x"></i>    </a>
-    <ul>
-      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+</style>
+<div class="container">
+     <div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="{{ url('bower_components/contenido/img1.jpg') }}"> <!-- random image -->
+        <div class="caption center-align">
+          <h3 class="contornear">Todos Ayudamos</h3>
+          <h5 class="light contornear"><b>Con diferente Sangre.</b></h5>
+        </div>
+      </li>
+      <li>
+        <img src="{{ url('bower_components/contenido/img2.jpg') }}"> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Donar Sangre</h3>
+          <h5 class="light grey-text text-lighten-3">Salva una Vida.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{{ url('bower_components/contenido/img3.jpg') }}"> <!-- random image -->
+        <div class="caption  right-align">
+          <h3 class="contornear">Salva Vidas</h3>
+          <h5 class="light contornear"><b> Con una Donacion.</b></h5>
+        </div>
+      </li>
+      <li>
+        <img src="{{ url('bower_components/contenido/img4.jpg') }}"> <!-- random image -->
+        <div class="caption  contornear center-align">
+          <h3 class="contornear">Es poco Tiempo!</h3>
+          <h5 class="light contornear"><b> Solo son 15min.</b></h5>
+        </div>
+      </li>
     </ul>
   </div>
-        
-                </div>
-            </div>
-        </div>
-    </div>
+      
 </div>
+<script type="text/javascript">
+   $(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+
+</script>
 @endsection

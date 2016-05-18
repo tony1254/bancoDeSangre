@@ -15,7 +15,7 @@
 				          <label class="active"  for="emaile">Email</label>
 				      </div>
 				      <div class="input-field col s6">
-				          <input placeholder="Ingrese Nombre de CUI" id="cui" name="cui" type="text" class="validate cui" value="{{$usuario->cui}}" required
+				          <input placeholder="Ingrese Nombre de CUI" id="cui" name="cui" type="text" class="validate cui" value="{{$usuario->cui}}" required disabled="" 
  							title="Ingrese un CUI valido : 9999-99999-9999">
 				          
 				          <label class="active"  for="emaile">CUI</label>
@@ -23,7 +23,7 @@
 				      <div class="input-field col s6">
 					
 						Rol:	
-						<select class="form-control" name="rol" id="rol">
+						<select class="form-control" name="rol" id="rol" disabled="">
 						@foreach ($roles as $rl)
 							<option value="{{$rl->id}}"
 								@if ($rl->id==$usuario->rol)

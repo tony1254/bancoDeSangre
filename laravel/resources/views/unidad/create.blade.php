@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Transaccion Creacion'}}@stop
+@section('title') {{'Creacion de Unidad'}}@stop
 
 @section('content')
 
