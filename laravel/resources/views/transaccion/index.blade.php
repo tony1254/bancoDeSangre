@@ -95,11 +95,11 @@
                                 remove_red_eye
                               </i>
         </a>
-         <a href="{{ url($mid.'/transaccion/'.$transaccion->idTransaccion.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
+        <!--  <a href="{{ url($mid.'/transaccion/'.$transaccion->idTransaccion.'/edit') }}" class=" btn-xs   amber-text waves-effect waves-yellow transparent">
                             <i class="material-icons" style="  vertical-align: top;">
                               create
                             </i>
-         </a>
+         </a> -->
       </div>
     </li>
   @endforeach

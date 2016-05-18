@@ -79,6 +79,7 @@
 	<a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/rptPersona') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Reporte de Donantes</a>
   <a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/gDonantes') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Grafica de Donantes</a>
   <a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/gUnidades') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Grafica de Unidades</a>
+    <a  class="btn teal white-text waves-effect waves-light" href="{{ url(mid().'/gTransacciones') }}"><i class="fa fa-search fa-2x" aria-hidden="true"></i>Grafica de Transacciones</a>
 
       </p></div>
     </li>

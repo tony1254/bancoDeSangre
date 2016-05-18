@@ -41,7 +41,22 @@ class rptPersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function reportes()
+    {
+        return view('reportes');
+    }
+    public function gUnidades()
+    {
+        return view('rptPersona/gUnidades');
+    }
+    public function gDonantes()
+    {
+        return view('rptPersona/gDonantes');
+    }
+    public function gTransacciones()
+    {
+        return view('rptPersona/gTransacciones');
+    }
    /**
    *index
    */

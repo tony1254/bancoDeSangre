@@ -33,10 +33,10 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function(){
-	Route::get('/reportes', 'HomeController@reportes');
-	Route::get('/gUnidades', 'HomeController@gUnidades');
-	Route::get('/gDonantes', 'HomeController@gDonantes');
-	Route::get('/gTransacciones', 'HomeController@gTransacciones');
+	Route::get('/reportes', 'rptPersona\rptPersonaController@reportes');
+	Route::get('/gUnidades', 'rptPersona\rptPersonaController@gUnidades');
+	Route::get('/gDonantes', 'rptPersona\rptPersonaController@gDonantes');
+	Route::get('/gTransacciones', 'rptPersona\rptPersonaController@gTransacciones');
 	Route::resource('rptPersona', 'rptPersona\rptPersonaController');
 
 	/*Rutas de formularios para Sesion de Usuario*/

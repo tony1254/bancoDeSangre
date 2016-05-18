@@ -26,20 +26,5 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function reportes()
-    {
-        return view('reportes');
-    }
-    public function gUnidades()
-    {
-        return view('rptPersona.gUnidades');
-    }
-    public function gDonantes()
-    {
-        return view('rptPersona.gDonantes');
-    }
-    public function gTransacciones()
-    {
-        return view('rptPersona.gTransacciones');
-    }
+
 }

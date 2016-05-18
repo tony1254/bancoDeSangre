@@ -4,7 +4,7 @@
 <script type="text/javascript">
 {{$e=App\TTransaccion::where('idTipoTransaccion',1)->count()}}//entrada
 {{$s=App\TTransaccion::where('idTipoTransaccion',2)->count()}}//salida
-{{$b=App\TTransaccion::where('idTipoTransaccion',3)->count()}}//borrado
+{{$p=App\TTransaccion::where('idTipoTransaccion',3)->count()}}//precesado
 
 
 function imprimir(){
@@ -51,7 +51,7 @@ var data = {
         data: [
             {{$e}},
             {{$s}},
-            {{$b}}
+            {{$p}}
         ],
         backgroundColor: [
             "#4caf50",
@@ -63,7 +63,7 @@ var data = {
     labels: [
         "Donacion",
         "Retiro",
-        "Desabilitadas"
+        "Procesadas"
     ]
 };
 var myChart = new Chart(ctx, {
