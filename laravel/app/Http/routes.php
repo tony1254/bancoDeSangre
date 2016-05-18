@@ -30,8 +30,10 @@ Route::auth();
 //     return view('welcome');
 // });
 // }
-Route::get('/home', 'HomeController@index');
-
+/*Route::get('/home', 'HomeController@index');
+App:missing(function($exeption){
+	return view('404');
+});*/
 Route::group(['middleware'=>['auth','administrador'],'prefix'=>'admin'],function(){
 	Route::get('/reportes', 'rptPersona\rptPersonaController@reportes');
 	Route::get('/gUnidades', 'rptPersona\rptPersonaController@gUnidades');
