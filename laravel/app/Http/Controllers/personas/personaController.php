@@ -212,8 +212,18 @@ return view('persona/show', ['msj'=>'Campos Repetidos','mid'=>mid(),'sexos'=>CSe
         //         {
         //             return redirect()->back()->withInput()->withErrors($v->errors());
         //         }   
-             
-        if($persona->peso<50||$persona->fechaNacimiento<date('Y-m-d', time()-86400*360*18 )){
+             // return var_dump($persona->fechaNacimiento<date('Y-m-d', time()-86400*365.25*65 ));
+$menor=false;//menor de edad
+$mayor=false;//adulto mayor de edad
+if ($persona->fechaNacimiento<date('Y-m-d', time()-86400*365.25*65 )) {
+  $mayor=true;//adulto mayor de edad
+}
+if ($persona->fechaNacimiento>date('Y-m-d', time()-86400*365.25*18 )) {
+  $menor=true;//menor de edad
+}
+
+        if($persona->peso<50||$mayor||$menor)//si espeso bajo o es mayor o es menor
+        {
           $persona->estado=0;
         }else{
           $persona->estado=1;
@@ -253,7 +263,19 @@ if($persona->id!=$id){
         $persona->fechaNacimiento=date_format($date,"Y-m-d");
         // $persona->estado=$request->input('estado');
 //return var_dump($persona->peso<50||$persona->fechaNacimiento>date('Y-m-d', time()-86400*360*18 ));
-        if($persona->peso<50||$persona->fechaNacimiento>date('Y-m-d', time()-86400*360*18 )){
+$menor=false;//menor de edad
+$mayor=false;//adulto mayor de edad
+if ($persona->fechaNacimiento<date('Y-m-d', time()-86400*365.25*65 )) {
+  $mayor=true;//adulto mayor de edad
+}
+if ($persona->fechaNacimiento>date('Y-m-d', time()-86400*365.25*18 )) {
+  $menor=true;//menor de edad
+}
+      // return date('Y-m-d', time()-86400*365.25*65 ).$persona->fechaNacimiento.$persona->fechaNacimiento.date('Y-m-d', time()-86400*365.25*18 ) ;
+      // return  var_dump(( $persona->fechaNacimiento<date('Y-m-d', time()-86400*365.25*65 )&&$persona->fechaNacimiento>date('Y-m-d', time()-86400*365.25*18 ) ));
+// return var_dump($mayor).var_dump($menor).var_dump($persona->peso<50);
+        if($persona->peso<50||$mayor||$menor)
+        {
           $persona->estado=0;
         }else{
           $persona->estado=1;
