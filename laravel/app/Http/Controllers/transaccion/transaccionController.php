@@ -152,6 +152,9 @@ public function store(Request $request)
       if (count($persona)==0) {
         return view('transaccion/valida', ['msj'=>'Persona no encontrada','mid'=>mid()]);
       }
+      if ($persona->estado!=1) {
+        return view('transaccion/valida', ['msj'=>'Persona no es Apta para Donar','mid'=>mid()]);
+      }
         $sangre=TSangre::where('idGrupoSangre',$persona->grupoSangre)
                         ->where('idFactorSangre',$persona->factorSangre)
                         ->where('idAlmacen',$request->input('almacen'))

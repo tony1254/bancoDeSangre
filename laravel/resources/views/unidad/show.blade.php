@@ -22,6 +22,10 @@
           <br>
             <b>Congelador:</b> {{App\CCongelador::find($unidad->idCongelador)->nombre}}
           <br>
+          <b>Creacion: {{$unidad->created_at}}</b>
+          <br>
+          <b>Edicion: {{$unidad->updated_at}}</b>
+          <br>
           <b>Caduca: </b>
           <!-- +86400*25 para probar fecha vencida -->
 @if ($unidad->caduca==date('Y-m-d', time()))

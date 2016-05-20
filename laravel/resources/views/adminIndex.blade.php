@@ -90,7 +90,7 @@
 					Trannsacciones
 				</a>
 				<a href="{{ url($mid.'/sangre') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-exchange fa-2x" aria-hidden="true"></i>
-					Sangre por Congeladores
+					Sangre Almacenada
 				</a>
 				<a href="{{ url($mid.'/unidad') }}" class="btn teal white-text waves-effect waves-light"><i class="fa fa-tint fa-2x" aria-hidden="true"></i>
 					Unidades

@@ -27,7 +27,7 @@ function imprimir(){
 <div class="row" >
   <div class="col-sm-4"></div>
   <div class="text-center">
-    <h4 >Unidades de Sangre</h4>
+    <h4 >Unidades </h4>
 <canvas id="myChart"></canvas>
   </div>
   

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') {{'Creacion de Unidad'}}@stop
+@section('title') {{'Creacion de Unidad Hemoderivada'}}@stop
 
 @section('content')
 
@@ -8,7 +8,7 @@
 <form class="form" role="form" method="POST" action="{{ url($mid.'/unidad/') }}">
                  {!! csrf_field() !!}
 <div class="panel panel-default"  id="ver">
-            <div class="panel-heading"> Validacion nueva unidad</div>
+            <div class="panel-heading"> Creacion de nueva unidad de Hemoderivado</div>
               <div class="panel-body">
   <div class="input-field col-sm-4">  
                             
@@ -65,7 +65,9 @@
 <div class="col-sm-3">
   <select class="form-control" name="hemoderivado" id="hemoderivado">
     @foreach (App\CHemoderivado::all() as $sexo)
-      <option value="{{$sexo->id}}">{{$sexo->nombre}}</option>
+      @if ($sexo->id!=1)
+        <option value="{{$sexo->id}}">{{$sexo->nombre}}</option>
+      @endif
     @endforeach
   </select>
 </div>

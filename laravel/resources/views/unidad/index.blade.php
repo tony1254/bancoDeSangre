@@ -40,7 +40,15 @@
           @if ($unidad->idEstadoUnidad==1)
               {{$tipoSangre['color']}}
             @else
-              black
+            @if ($unidad->idEstadoUnidad==3)
+                deep-purple darken-2
+              @else
+              @if ($unidad->idEstadoUnidad==4)
+                  lime darken-4
+                @else
+                  black
+              @endif
+            @endif
           @endif
                  ">
         <div class="row text-center" >
@@ -55,7 +63,7 @@
         <span class="title">  Unidad #: {{$unidad->id}} </span>
         <p>         
           Vence:  {{substr($unidad->caduca,8,2)}}-{{substr($unidad->caduca,5,2)}}-{{substr($unidad->caduca,0,4)}}<br>
-          Contenido: {{$unidad->contenido}}ml
+          Contenido: {{$unidad->contenido}}ml de {{App\CHemoderivado::find($unidad->idHemoderivado)->nombre}}
         </p>
       <form class="form" role="form" method="POST" action="{{ url($mid.'/unidad/'.$unidad->id) }}">
       <div class="secondary-content">
@@ -69,14 +77,16 @@
 <input type="text" name="_method" value="delete" hidden>
          <button class=" btn   red-text waves-effect waves-red transparent tooltipped" type="sumit" name="transaccion" 
          @if ($unidad->idEstadoUnidad==1)
-          data-position="top" data-delay="50" data-tooltip="Inactivar">
+          data-position="top" data-delay="50" data-tooltip="Inactivar" >
             <i class="fa fa-trash" aria-hidden="true"></i>
          @endif
          @if ($unidad->idEstadoUnidad==2)
           data-position="top" data-delay="50" data-tooltip="Re-Activar">
             <i class="fa fa-undo" aria-hidden="true"></i>
          @endif
-
+         @if ($unidad->idEstadoUnidad>2)
+          data-position="top" data-delay="50" data-tooltip="Escondido" style="display:none">
+         @endif
          </button>
       </div>
 </form>
@@ -85,12 +95,12 @@
   </ul>
 			 		 </div>
 			 	</div>
-<!-- <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
-    <a class="btn-floating btn-large red tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo" href="{{ url($mid.'/unidad/create') }}">
+ <div class="fixed-action-btn" style="bottom: 50px; right: 24px;">
+    <a class="btn-floating btn-large red tooltipped waves-effect waves-light" data-position="left" data-delay="50" data-tooltip="Nuevo Hemoderivado" href="{{ url($mid.'/unidad/create') }}">
 
     	<i class="fa fa-plus"></i>
     </a>
     
-  </div> -->
+  </div> 
 
 @endsection

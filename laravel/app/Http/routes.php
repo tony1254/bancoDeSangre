@@ -25,11 +25,11 @@ Route::auth();
 
 
 
-// if(Auth::guest()){
-// Route::get('/register',  function () {
-//     return view('welcome');
-// });
-// }
+if(Auth::guest()){
+Route::get('/register',  function () {
+    return view('welcome');
+});
+}
 Route::get('/home', 'HomeController@index');
 /*App:missing(function($exeption){
 	return view('404');

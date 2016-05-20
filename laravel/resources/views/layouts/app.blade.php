@@ -126,7 +126,6 @@ a.usub
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <a class="nounderline grey-text text-lighten-5" href="{{ url('/login') }}">Login</a>
-                            <a class="nounderline grey-text text-lighten-5" href="{{ url('/register') }}">Registro</a>
                         @else
                    
                         <!-- Dropdown contenido -->
@@ -194,9 +193,7 @@ a.usub
         
 
          @if (Auth::guest())
-        <li><a class="nounderline  " href="{{ url('/home') }}"> Banco de Sangre</a></li>
         <li><a class="nounderline  "href="{{ url('/login') }}">Login</a></li>
-        <li><a class="nounderline "href="{{ url('/register') }}">Register</a></li>
 
 
         
@@ -209,7 +206,7 @@ a.usub
         </div>
            
                               
-                           <a class="brand-logo white-text btn-block text-center" href="{{ url('/') }}">
+                           <a class="brand-logo white-text btn-block text-center" href="{{ url('/home') }}">
     <font size=4>
     <span class="fa-stack fa-lg  fa-2x ">
                            <img alt="Responsive " class="img-responsive img-rounded " src="\bower_components/contenido/icono-o-1.png">

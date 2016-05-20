@@ -138,7 +138,7 @@ public function update($id,Request $request)
           $usuario->name=$request->input('nombre');
         $usuario->cui=str_replace('-', '', $request->get('cui'));
              
-        if (Auth::user()->id==$usuario->id) {
+        if (Auth::user()->id==$usuario->id&& $usuario->rol!=$request->input('rol')) {
           return redirect()->to('admin/usuario?search='.$usuario->cui.'&msj=Uno Mismo no puede quitarse Rol de Adminstrador');
         }
           $usuario->rol=$request->input('rol');

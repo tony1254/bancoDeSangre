@@ -129,6 +129,20 @@ function datoCatalogo($catalogo,$id)
         }
         return $datos;
 }
+function vencimiento($hemoderivado){
+   if ($hemoderivado==1) {
+          return date('Y-m-d', time()+86400*25 );//Sangre total caduca en un mes 25 dias
+      }elseif ($hemoderivado==2) {
+          return date('Y-m-d', time()+86400*42 );//Hematies o globulos rojos caduca 42 dias
+      }elseif ($hemoderivado==3) {
+          return date('Y-m-d', time()+86400*6 );//Plaquetas caduca en  6 dias
+      }elseif ($hemoderivado==4) {
+          return date('Y-m-d', time()+86400*360 );//plasma caduca en un 1 año
+      }else{
+          return date('Y-m-d', time()+86400*25 );//por defecto un mes 25 dias
+      }
+}
+
 /*http://hemoderivadosmesa8.blogspot.com/
 http://larepublica.pe/14-06-2012/sangre-donada-tiene-fecha-de-vencimiento
 REFERENCIA SNAGUINEA

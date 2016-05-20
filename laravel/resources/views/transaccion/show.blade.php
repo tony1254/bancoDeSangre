@@ -92,6 +92,15 @@
           <b>Email: </b>{{$usuario->email}}
           <br>
           <b>Rol:</b> {{App\CRol::find($usuario->rol)->nombre}}
+          <br>
+          <br>
+          <br>
+               
+<b>Transaccion</b>
+<hr style="width: 100%; color: black; height: 1px; background-color:black;" />                       
+          <b>Fecha de Creacion:</b> {{$transaccion->created_at}}
+          <br>
+             
               </div>
             </div>
           </div>
@@ -109,13 +118,18 @@
     <li class="collection-item avatar">
         <a href="{{ url($mid.'/unidad/'.$unidad->id.'') }}" 
                 class=" usub  circle white-text waves-effect waves-light
-          @if ($unidad->idEstadoUnidad==1||$unidad->idEstadoUnidad==3)
+            @if ($unidad->idEstadoUnidad==1)
               {{$tipoSangre['color']}}
-          @endif              
-          @if ($unidad->idEstadoUnidad==4)
-               lime darken-4
             @else
-              black
+            @if ($unidad->idEstadoUnidad==3)
+                deep-purple darken-2
+              @else
+              @if ($unidad->idEstadoUnidad==4)
+                  lime darken-4
+                @else
+                  black
+              @endif
+            @endif
           @endif
                  ">
         <div class="row text-center" >
@@ -151,7 +165,9 @@
           data-position="top" data-delay="50" data-tooltip="Inactivar">
             <i class="fa fa-undo" aria-hidden="true"></i>
          @endif
-
+         @if ($unidad->idEstadoUnidad>2)
+          data-position="top" data-delay="50" data-tooltip="Escondido" style="display:none">
+         @endif
          </button>
       </div>
 </form>         

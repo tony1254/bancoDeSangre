@@ -73,6 +73,19 @@
           
         </div>
       <div id="afeecion">
+<div class="row text-center" id="spiner">
+  <div class="preloader-wrapper big active">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+</div>      
             <div class="col-xs-3 col-xs-offset-9">
               <a id="boton"class="btn btn-floating btn-fab-mini green  darken-3 waves-effect waves-light tooltipped
                 @if (count($persona)==0)
@@ -82,10 +95,11 @@
           </div>
           @if (count($afecciones)>0)
             <table class=" table table-hover table-responsive table-condensed">
-              <tr><th width="150">Afecciones</th><th>Acciones</th></tr>
+              <tr><th width="150">Afecciones</th><th>Fecha</th><th>Acciones</th></tr>
               @foreach ($afecciones as $afeccion)
                 <tr>
                   <td width="150" style="  vertical-align: middle;"> {{App\CTipoAfeccion::find($afeccion->idTipoAfeccion)->nombre}}</td>
+                  <td width="150" style="  vertical-align: middle;"> {{date_format($afeccion->created_at,"d-m-Y")}}</td>
                   <td width="350" >
                   <form class="form" role="form" method="POST" action="{{ url($mid.'/persona/'.$persona->id.'/afeccionEliminar/'.$afeccion->id) }}">
                         {!! csrf_field() !!}
@@ -102,10 +116,15 @@
           @endif
       </div>
         <script type="text/javascript">
+        $( document ).ready(function() {
+            $( '#spiner' ).toggle();
+          });
           function afeccoiAdd(){
         $('.tooltipped').tooltip('remove');
 
+$( '#spiner' ).show();
 $( '#afeecion' ).load( '{{ url($mid.'/persona/'.$persona->id.'/afeccionAdd ') }}' );
+
           }
         </script>
 </div>

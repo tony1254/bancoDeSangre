@@ -114,13 +114,28 @@ public function afeccionGet($id)
    */
 public function afeccionAdd($id,Request $request)
    {
-    $persona=Persona::find($id);
-    $persona->estado=0;
-    $persona->save();
+   $persona=Persona::find($id);
+ 
+$date=date_create($request->input('fecha'));
+$date=date_format($date,"Y-m-d H:i:s");
 $afeccion=new UAfeccion;
 $afeccion->cui=$persona->cui;
 $afeccion->idTipoAfeccion=$request->input('afeccion');
 $afeccion->save();
+$afeccion->created_at=$date;
+$afeccion->save();
+   $persona->estado=0;
+$fechaNacimiento=date_create($persona->fechaNacimiento);
+
+
+   
+   if($request->input('afeccion')==1&&$afeccion->created_at<date('Y-m-d H:i:s',strtotime ( '+11 year' , strtotime (date_format($fechaNacimiento,"Y-m-d H:i:s")) ) ))
+   {
+      $persona->estado=1;
+   }
+    
+    $persona->save();
+
         return redirect()->to(mid().'/persona/'.$persona->id.'?msj=Nueva Afeccion Agregada exitosamente');
    }      /**
    *FUncion para eliminar de afeccion
@@ -198,7 +213,11 @@ return view('persona/show', ['msj'=>'Campos Repetidos','mid'=>mid(),'sexos'=>CSe
         //             return redirect()->back()->withInput()->withErrors($v->errors());
         //         }   
              
-
+        if($persona->peso<50||$persona->fechaNacimiento<date('Y-m-d', time()-86400*360*18 )){
+          $persona->estado=0;
+        }else{
+          $persona->estado=1;
+        }
 
 
         $persona->save();  
@@ -233,6 +252,12 @@ if($persona->id!=$id){
         $persona->peso=$request->input('peso');
         $persona->fechaNacimiento=date_format($date,"Y-m-d");
         // $persona->estado=$request->input('estado');
+//return var_dump($persona->peso<50||$persona->fechaNacimiento>date('Y-m-d', time()-86400*360*18 ));
+        if($persona->peso<50||$persona->fechaNacimiento>date('Y-m-d', time()-86400*360*18 )){
+          $persona->estado=0;
+        }else{
+          $persona->estado=1;
+        }
         $persona->save();  
         return redirect()->to(mid().'/persona?search='.$persona->cui);
 

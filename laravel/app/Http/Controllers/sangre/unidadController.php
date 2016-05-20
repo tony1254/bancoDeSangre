@@ -98,34 +98,17 @@ public function create()
    }
 public function store(Request $request)
    {
-         $usuario=new User;
-        $usuario->name=$request->input('nombre');
-        $usuario->cui=str_replace('-', '', $request->get('cui'));
-        $usuario->rol=$request->input('rol');
-         $v = \Validator::make($request->all(), [
-            
-              'email' => 'required|email|max:255|unique:users',
-            'contrasena' => 'min:6'
-            ],[
-    'unique' => 'Usuario ya existente',
-    'min' => 'Contraseña no cumple con el tamaño minimo',
-    'required' => 'Falto llenar campos',
-]);
-             if($usuario->email!=$request->input('email')){
-
-            if ($v->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }   
-             }
-        $usuario->email=$request->input('email');
-        if (!empty($request->get('contrasena'))) {
-           $usuario->password=bcrypt($request->get('contrasena'));
-        }
-        $usuario->save();  
-        return redirect()->to('admin/usuario?search='.$usuario->cui);
-         
-        return "store";    
+        $unidad= new TUnidad;
+          $unidad->idGrupoSangre=$request->input('grupoSangre');
+          $unidad->idFactorSangre=$request->input('factorSangre');
+          $unidad->idHemoderivado=$request->input('hemoderivado');
+          $unidad->idAlmacen=$request->input('almacen');
+          $unidad->idCongelador=$request->input('congelador');
+          $unidad->idEstadoUnidad=1;//activa
+          $unidad->caduca=vencimiento($request->input('hemoderivado'));
+          $unidad->contenido=$request->input('contenido');
+          $unidad->save();
+        return redirect()->to('admin/unidad?search='.$unidad->id);
    }
    /**
    *FUncion para Actuaizar
@@ -136,6 +119,7 @@ public function update($id,Request $request)
           $unidad->idAlmacen=$request->input('almacen');
           $unidad->idCongelador=$request->input('congelador');
           $unidad->idEstadoUnidad=$request->input('estado');
+          $unidad->caduca=$request->input('caduca');
           $unidad->contenido=$request->input('contenido');
           $unidad->save();
         return redirect()->to('admin/unidad?search='.$unidad->cui);
